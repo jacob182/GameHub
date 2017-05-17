@@ -1,0 +1,477 @@
+body {
+  margin: 0px;
+  padding:0px;
+  font-family: HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,sans-serif;
+  background-color: #ddd;
+}
+a {
+  text-decoration:none;
+}
+h1 { color: #111; font-family: 'Helvetica Neue', sans-serif; font-size: 50px; font-weight: bold; letter-spacing: -1px; line-height: 1; text-align: center;}
+
+
+h2 { color: #111; font-family: 'Open Sans', sans-serif; font-size: 30px; font-weight: 300; line-height: 32px; margin: 0 0 15px; text-align: center; }
+
+
+p { color: #333333; font-family: "Helvetica Neue",Arial,sans-serif; font-size: 16px; font-weight: 300; line-height: 1.5625; margin: 0;}
+
+nav {
+  box-shadow:0 1px 1px #ccc;
+  font:16px Arial, Helvetica, sans-serif;
+  padding:20px 40px;
+  height:40px;
+  background:#292c2f;
+  color:#fff;
+}
+nav .wrapper .left {
+  min-width:410px;
+}
+.wrapper{
+  width: 60%;
+  min-width: 1000px;
+  margin: 0 auto;
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+
+}
+nav .wrapper, footer .wrapper {
+  display:flex;
+  max-width: 1216px !important;
+  margin:0 auto;
+  justify-content:space-between;
+}
+nav .wrapper .left ul, nav .wrapper .right ul {
+  list-style-type:none;
+  width:100%;
+  margin:11px 10px 10px 60px;
+  padding:0px;
+
+}
+nav .wrapper .left ul li, nav .wrapper .right ul li {
+  display:inline;
+  padding: 10px 5px;
+  font-size:14px;
+}
+nav .wrapper .left ul li a, nav .wrapper .right ul li a  {
+  color:#E0DEDE;
+  text-decoration: none;
+}
+nav .wrapper .left ul li a:hover, nav .wrapper .right ul li a:hover {
+  opacity:1;
+  color:#fff;
+}
+#signup {
+  background:#3a3c3e;
+  padding:10px 15px;
+  margin-left:10px;
+  border-radius:3px;
+  font-weight:bold;
+}
+#logo {float:left;}
+
+#clear {clear:both;}
+
+.block{
+  display: block;
+}
+.profile{
+  width: 25%;
+}
+
+.profile-box, .signup-box{
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 10px;
+  background-color: #fff;
+  padding: 16px 20px 30px;
+}
+.signup-box{
+text-align: center;
+}
+
+.description-user{
+  text-align: center;
+  font-weight: bold;
+  margin: 15px 0 15px;
+  width: 20%;
+  float: left;
+}
+.feed{
+  width: 75%;
+}
+.feed-item{
+  background-color: #eee;
+  margin-top: 10px;
+  border: 2px solid #eee;`
+}
+.feed-description{
+  padding: 10px;
+  display: flex;
+}
+.username-wrapper{
+  padding-top: 5px;
+  display: flex;
+  justify-content: space-around;
+}
+#user-avatar{
+  border: 1px solid #666;
+  border-radius: 100px;
+  overflow: hidden;
+  width: 60;px;
+  height: 60px;
+}
+.user-stats{
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+.paypal{
+  width: 92px;
+  height: 26px;
+}
+input, textarea {
+  display: block;
+  outline: 0;
+  padding: 11px;
+  font-size: 14px;
+  width: 100%;
+  margin-top: 2px;
+}
+.field-wrap{
+  margin-bottom: 10px;
+}
+#login{
+  background-color: #fff;
+  padding: 40px;
+  width: 400px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  box-shadow: 0 0px 5px rgba(0,0,0,0.5);
+}
+.login-container, .signup-container{
+  overflow: hidden;
+  margin: 0 auto;
+  width: 500px;
+  padding: 20px 55px;
+}
+.profile-login{
+  display: inline-block;
+  border: 1px solid black;
+  color: #000;
+  border-radius: 3px;
+  background-color: #f90;
+  font-size: 17px;
+  font-weight: bold;
+  text-decoration: underline;
+  padding: 8px 20px;
+  text-decoration: none;
+  font-family: 'Montserrat', arial, sans-serif;
+  text-transform: uppercase;
+}
+.loginbtn, .signupbtn{
+    display: inline-block;
+    border: 1px solid black;
+    color: #000;
+    border-radius: 3px;
+    background-color: #f90;
+    font-size: 17px;
+    font-weight: bold;
+    padding: 8px 20px;
+    text-decoration: none;
+    font-family: 'Montserrat', arial, sans-serif;
+    text-transform: uppercase;
+}
+.editbtn{
+  float: right;
+  margin: 5px 5px 0 0;
+}
+.author-name{
+  display: inline-block;
+  font-weight: 700;
+  margin-right: 5px;
+  color: #75affc;
+}
+.username{
+  text-transform: capitalize;
+  font-size: 1.5em;
+  width: 60%;
+  line-height: 60px;
+  color: #75affc;
+  font-weight: 700;
+}
+.avatar{
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  border: 1px solid #666;
+  border-radius: 50%;
+}
+.comment-avatar{
+  width:30px;
+  height:30px;
+}
+.comment-list{
+  background-color: #fff;
+  padding: 0 10px 5px 10px;
+}
+.comment-entry{
+  width: 95%;
+  padding:5px;
+  display: flex;
+  margin-left: 30px;
+}
+.delete-comment{
+  right: 5px;
+  padding:0px 4px;
+  height: 18px;
+}
+#slides{
+  width: 100%;
+}
+.loginbtn:hover, .signupbtn:hover, .profile-login:hover{
+  background-color: #ffa31a;
+  cursor: pointer;
+}
+.choose-file{
+  width:100%;
+}
+.submit-file{
+  width:100%;
+}
+.profile-header{
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+  background-color: #efefef;
+  max-width: 1000px;
+  margin: 0 auto;
+  margin-top:40px;
+  margin-bottom: 40px;
+  border: 2px solid #eee;
+  position: relative;
+  height: 100px;
+}
+figure.profile-banner {
+  left: 0;
+  overflow: hidden;
+  top: 0;
+}
+
+figure.profile-picture {
+  background-position: center;
+  background-size: cover;
+  border: 5px #efefef solid;
+  border-radius: 50%;
+  bottom: -50px;
+  box-shadow: inset 1px 1px 3px rgba(0,0,0,0.2), 1px 1px 4px rgba(0,0,0,0.3);
+  height: 148px;
+  position: absolute;
+  width: 148px;
+}
+
+div.profile-stats {
+  bottom: 0;
+  left: 0;
+  padding: 0px 0px 0px 250px;
+  position: absolute;
+  right: 0;
+  background-color: rgba(41, 44, 47, 0.6);
+}
+div.profile-stats ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+div.profile-stats ul li {
+  color: #efefef;
+  display: block;
+  float: left;
+  font-size: 24px;
+  font-weight: bold;
+  margin-right: 50px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.7)
+}
+.profile-header>h1 {
+  margin-left: -100px;
+  margin-top: 5px;
+  top: 0;
+  font-size: 40px;
+  left: 350px;
+  position: absolute;
+}
+div.profile-stats li span {
+  display: block;
+  font-size: 16px;
+  font-weight: normal;
+}
+.edit-profile-container{
+  overflow: hidden;
+  width: 700px;
+  padding: 20px 55px;
+}
+.edit-profile-heading{
+  font-size: 20px;
+}
+.edit-username{
+  margin-left: 5px;
+  font-weight: bold;
+}
+#edit-password{
+  float: right;
+  width: 90%;
+  display: none;
+}
+.vid-description{
+  display: block;
+  outline: 0;
+  padding: 5px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  width: 100%;
+  margin-top: 2px;
+}
+.upload-form{
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1000px;
+}
+.delete-account{
+}
+footer {
+  background:#292c2f;
+  font: bold 16px arial;
+  padding:30px;
+  margin-top:10px;
+}
+footer .wrapper {
+  max-width:100%;
+  text-align:left;
+}
+footer .wrapper .left {
+  width:75%;
+}
+footer .wrapper .left ul {
+  list-style-type:none;
+  margin:10px 0px 0px 0px;
+  padding:0px;
+}
+footer .wrapper .left ul li {
+  display:inline;
+}
+footer .wrapper .left ul li a {
+  color:#fff;
+  text-decoration: none;
+  font-weight:bold;
+}
+
+#copyright {
+  color:#8f9296;
+  font-weight:normal;
+  display:block;
+  margin:15px 0px;
+  font-size:14px;
+}
+.footer-icons {
+  margin-top:25px;
+}
+.footer-icons a {
+  display: inline-block;
+	width: 35px;
+  padding:10px 5px 10px 5px;
+	cursor: pointer;
+	background-color:  #33383b;
+	border-radius: 2px;
+
+	font-size: 20px;
+	color: #ffffff;
+	text-align: center;
+
+	margin-right: 3px;
+	margin-bottom: 5px;
+}
+footer .wrapper .right h3 {
+  margin: 10px 42px 35px 0;
+	color: #ffffff;
+  font-size:16px;
+}
+
+footer .wrapper .right form input,
+footer .wrapper .right form textarea {
+  display:block;
+  border-radius:3px;
+  background: #1f2022;
+  box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.1);
+  border:none;
+  outline:none;
+  margin: 10px 0px;
+  resize:none;
+  font-size:14px;
+  font-weight:normal;
+  color:  #d1d2d2;
+  width:375px;
+  padding:18px;
+}
+footer .wrapper .right form textarea {
+  height:100px;
+}
+footer .wrapper .right form input[type='submit'] {
+  background-color:  #33383b;
+	color: #ffffff;
+  padding:15px 50px;
+  font-weight:bold;
+  width:150px;
+}
+@media all and (max-width:725px) {
+  nav .wrapper .right {
+    display:none;
+  }
+  .third-container{
+    width: 100%;
+  }
+}
+
+@media all and (max-width : 1000px) {
+  .wrapper  {
+    min-width:100px;
+    width:100%;
+    overflow:hidden;
+  }
+  footer .wrapper .right {
+    display:none;
+  }
+  footer {
+    padding: 30px 0px 30px 0px;
+  }
+  footer .wrapper .left {
+    width:100%;
+    margin:0 auto;
+    text-align:center;
+  }
+  .paypal{
+    margin: 0 auto;
+  }
+  .edit-profile-container{
+    overflow: hidden;
+    width: 700px;
+    padding: 20px 30px;
+  }
+  .delete-account{
+    position: absolute;
+    right: 30px;
+  }
+  .feed{
+    width: 100%;
+  }
+  .profile{
+    display:none;
+  }
+}
+
+@media all and (max-width:600px) {
+  #logo {float:none;}
+  nav {height:auto;}
+  nav .wrapper .left ul {
+    margin:10px 0px 0px;
+  }
+}
