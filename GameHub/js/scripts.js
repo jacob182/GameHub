@@ -51,7 +51,6 @@ function showComments(VidID) {
 
         comment.innerHTML = '<a class="author-avatar" href=""><img class="avatar comment-avatar" src="../images/profile_images/test.jpg" alt="Author Image"></a><p><a class="author-name" href="">' + comments[i].Username + '</a>' + comments[i].Comment_txt + '</p>';
         if(comments[i].owned == 1) {
-            //display edit/ delete link here
             comment.innerHTML += '<a href="../controller/delete_comment_process.php?commentID=' + comments[i].Comment_ID + '" onclick="return confirm(\'Are you sure you want to delete this comment?\')"><button class="delete-comment">X</button></a>';
         }
         commentContainer.appendChild(comment);

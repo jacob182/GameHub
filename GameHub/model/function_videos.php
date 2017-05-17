@@ -1,6 +1,5 @@
 <?php
 
-// in function_videos.php
 function delete_comment($commentID)
 {
   //establishing the connection to the database

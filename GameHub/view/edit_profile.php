@@ -39,8 +39,8 @@
 				<input  id="confirm-new-password" name="confirmNewPassword" type="password">
 			</div>
 		</div>
-	<div style="clear:both"></div>
-		<input type="submit" class="profilebtn" value="Save Changes" />
+		<div style="clear:both"></div>
+			<input type="submit" class="profilebtn" value="Save Changes" />
 	</form>
 	<form class="delete-account" method="POST" action="delete_account_process.php">
 		<input class="profilebtn" type="submit" onclick="confirm('Are you sure you want to delete your account?');" name="delete" value="Delete Account"/>
