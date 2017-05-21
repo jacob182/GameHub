@@ -127,6 +127,19 @@ text-align: center;
   justify-content: space-around;
   text-align: center;
 }
+.settings-avatar{
+  border-radius: 50%;
+  width: 138px;
+  border: 4px solid #fff;
+}
+.settings-avatar-box{
+  margin: 20px 0;
+  display: block;
+}
+.upload-avatar{
+  width:138px;
+  margin: 0 auto;
+}
 .paypal{
   width: 92px;
   height: 26px;
@@ -141,6 +154,10 @@ input, textarea {
 }
 .field-wrap{
   margin-bottom: 10px;
+}
+.field-wrap-avatar{
+  margin-bottom: 10px;
+  text-align: center;
 }
 #login{
   background-color: #fff;
@@ -235,7 +252,7 @@ input, textarea {
   cursor: pointer;
 }
 .choose-file{
-  width:100%;
+  width:220px;
 }
 .submit-file{
   width:100%;

@@ -20,7 +20,10 @@
 			<li>32    <span>Following</span></li>
 		</ul>
 	</div>
-	<figure class="profile-picture" style="background-image: url('../images/profile_images/test.jpg')"> </figure>
+	<div class="profile-picture-container">
+		<a href="edit_profile.php"><figure class="profile-picture" style="background-image: url('../images/profile_images/test.jpg')"></figure></a>
+	</div>
+
 	<h1><?php echo $_SESSION['user'] ?></h1>
 <button class="editbtn" onclick="location.href='edit_profile.php';">Edit Profile </button>
 
