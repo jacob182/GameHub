@@ -64,13 +64,16 @@
 	function get_member($username)
 	{
 		global $conn;
-  	$sql = "SELECT * FROM members WHERE username = :username";
+		$sql = "SELECT * FROM members WHERE username = :username";
 		$statement = $conn->prepare($sql);
 		$statement->bindValue(':username', $username);
-  	$statement->execute();
-  	$result = $statement->fetch();
-  	$statement->closeCursor();
-  	return $result;
+		$statement->execute();
+		$result = $statement->fetch();
+		$statement->closeCursor();
+		if(count($result) == 0) {
+			return false;
+		} 
+		return $result;
 	}
 
 	function edit_profile($email, $username)

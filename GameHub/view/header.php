@@ -1,6 +1,10 @@
 <html>
   <head>
-    <title><?php echo $title ?></title>
+    <title><?php
+	//Display errors for development environment
+	ini_set('display_errors',1);
+	error_reporting(E_ALL);
+	echo $title ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!--  <noscript>
