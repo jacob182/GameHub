@@ -7,7 +7,7 @@ body {
 a {
   text-decoration:none;
 }
-h1 { color: #111; font-family: 'Helvetica Neue', sans-serif; font-size: 50px; font-weight: bold; letter-spacing: -1px; line-height: 1; text-align: center;}
+h1 { color: #111; font-family: 'Helvetica Neue', sans-serif; font-size: 50px; font-weight: bold; letter-spacing: -1px; text-transform: capitalize; line-height: 1; text-align: center;}
 
 
 h2 { color: #111; font-family: 'Open Sans', sans-serif; font-size: 30px; font-weight: 300; line-height: 32px; margin: 0 0 15px; text-align: center; }
@@ -39,6 +39,7 @@ nav .wrapper, footer .wrapper {
   display:flex;
   max-width: 1216px !important;
   margin:0 auto;
+  min-width: 900px;
   justify-content:space-between;
 }
 nav .wrapper .left ul, nav .wrapper .right ul {
@@ -100,6 +101,9 @@ text-align: center;
 .feed{
   width: 75%;
 }
+.profile-feed{
+  max-width: 1000px;
+}
 .feed-item{
   background-color: #eee;
   margin-top: 10px;
@@ -130,6 +134,7 @@ text-align: center;
 .settings-avatar{
   border-radius: 50%;
   width: 138px;
+  height: 138px;
   border: 4px solid #fff;
 }
 .settings-avatar-box{
@@ -205,6 +210,7 @@ input, textarea {
   margin: 5px 5px 0 0;
 }
 .author-name{
+  text-transform: capitalize;
   display: inline-block;
   font-weight: 700;
   margin-right: 5px;
@@ -215,7 +221,7 @@ input, textarea {
   font-size: 1.5em;
   width: 60%;
   line-height: 60px;
-  color: #75affc;
+  color: black;
   font-weight: 700;
 }
 .avatar{
@@ -310,6 +316,7 @@ div.profile-stats ul li {
   text-shadow: 1px 1px 2px rgba(0,0,0,0.7)
 }
 .profile-header>h1 {
+  text-transform: capitalize;
   margin-left: -100px;
   margin-top: 5px;
   top: 0;
@@ -347,6 +354,12 @@ div.profile-stats li span {
   border: 1px solid #ccc;
   width: 100%;
   margin-top: 2px;
+}
+.follow{
+  color: #71b6ff;
+}
+.bold{
+  font-weight: bold;
 }
 .upload-form{
   margin: 0 auto;
@@ -450,7 +463,7 @@ footer .wrapper .right form input[type='submit'] {
 
 @media all and (max-width : 1000px) {
   .wrapper  {
-    min-width:100px;
+    min-width:100px !important;
     width:100%;
     overflow:hidden;
   }
@@ -477,7 +490,7 @@ footer .wrapper .right form input[type='submit'] {
     position: absolute;
     right: 30px;
   }
-  .feed{
+  .feed, .profile-feed{
     width: 100%;
   }
   .profile{

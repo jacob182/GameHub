@@ -25,13 +25,12 @@
     <nav>
       <div class="wrapper">
         <div class="left">
-          <a href="#" id='logo'>
+          <a href="feed.php" id='logo'>
             <img src="../images/logo.png" alt="Game Hub" width="150" height="40" />
           </a>
           <ul>
             <li><a href="feed.php">Video Feed</a></li>
-            <li><a href="#">Featured</a></li>
-            <li><a href="about.php">About Us</a></li>
+            <li><a href="#">Followed</a></li>
             <?php
             if(isLogged()) {
               print("<li><a href='profile.php'>Profile</a></li>");
@@ -39,6 +38,7 @@
               print("<li><a href='login.php'>Profile</a></li>");
             }
             ?>
+            <li><a href="about.php">About Us</a></li>
           </ul>
           <div id="clear"></div>
         </div>

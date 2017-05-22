@@ -10,27 +10,36 @@
 <div class="wrapper">
   <div class="profile">
         <?php
+
         if(isLogged()) {
+          $username = $_SESSION['user'];
+          $user = get_member($username);
+
+          global $conn;
+          $stmt = $conn->prepare("SELECT count(*) FROM `videos` WHERE `Username` = ?");
+          $stmt->execute(array($username));
+          $vidCount = $stmt->fetch();
+          $vidCount = $vidCount['count(*)'];
             print('<div class="profile-box">
           <div class="username-wrapper">
             <div id="user-avatar">
               <img src="../images/profile_images/test.jpg" alt="avatar" width="100%" height="100%">
             </div>
-                    <a class="username" href="">' . $_SESSION['user'] . '</a>
+                    <a class="username" href="/gamehub/view/profile.php?username=' . $_SESSION['user'] . '">' . $_SESSION['user'] . '</a>
           </div>
 
           <div class="user-stats">
             <div>
-              <div>Videos</div></br>
-              <div>#</div>
+              <div><a class="follow bold" href="profile.php">Videos</a></div></br>
+              <div>' . $vidCount . '</div>
             </div>
             <div>
-              <div>Followers</div></br>
-              <div>#</div>
-                    </div>
+              <div><a class="follow bold" href="#">Followers</a></div></br>
+              <div>' . $user['followers'] . '</div>
+              </div>
             <div>
-                        <div>Followed</div></br>
-              <div>#</div>
+              <div><a class="follow bold" href="#">Followed</a></div></br>
+              <div>' . $user['following'] . '</div>
             </div>
                 </div>
             </div>');
@@ -47,7 +56,7 @@
   <div class ="feed">
         <?php
         global $conn;
-        $sql = 'SELECT * FROM videos ORDER BY Date_added';
+        $sql = 'SELECT * FROM videos ORDER BY Date_added DESC';
         $statement = $conn->prepare($sql);
         $statement->execute();
         $result = $statement->fetchAll();
@@ -58,9 +67,17 @@
                                      <video src="../' . $item['Vid_url'] . '" width="100%" controls></video>
                                  </div>
                                 <div class="feed-description">
-                                        <a class="author-avatar" href=""><img class="avatar" src="../images/profile_images/test.jpg" alt="Author Image"></a>
-                                        <p><a class="author-name" href="">' . $item['Username'] . '</a>' . $item['Vid_description'] . '</p>
-                                     </div>
+                                  <a class="author-avatar" href="/gamehub/view/profile.php?username=' . $item['Username'] . '"><img class="avatar" src="../images/profile_images/test.jpg" alt="Author Image"></a>
+                                  <p><a class="author-name" href="/gamehub/view/profile.php?username=' . $item['Username'] . '">' . $item['Username'] . '</a>' . $item['Vid_description'] . '</p>';
+                                    if(isLogged()){
+                                      if($item['Username'] == $_SESSION['user']) {
+                                        ?>
+                                        <a href="../controller/delete_video_process.php?vidID=<?php echo $item["Vid_ID"]; ?>" onclick="return confirm('Are you sure you want to delete this video?')">
+                                          <button class="delete-video">Delete Video</button>
+                                        </a>
+                                        <?php }
+                                    } echo '
+                                </div>
                              	</div>';
 
 												echo "<div id='comments_{$item['Vid_ID']}'>";
@@ -100,7 +117,7 @@
                     }
 
               echo' </div>';
-              
+
           if(isLogged()) {
               echo'<form class="comment-form" action="../controller/comment_process.php" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="Vid_ID"  value=' . $item['Vid_ID'] . ' />

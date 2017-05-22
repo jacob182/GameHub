@@ -19,10 +19,9 @@
 
       <span id="copyright">GameHub &copy; 2017</span>
       <div class="footer-icons">
-        <a href="#"><i class="fa fa-facebook"></i></a>
+        <a href="https://www.facebook.com/ajacobfull"><i class="fa fa-facebook"></i></a>
         <a href="#"><i class="fa fa-twitter"></i></a>
-        <a href="#"><i class="fa fa-linkedin"></i></a>
-        <a href="#"><i class="fa fa-github"></i></a>
+        <a href="https://github.com/jacob182"><i class="fa fa-github"></i></a>
       </div>
     </div>
     <div class="right">

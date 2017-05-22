@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 21, 2017 at 03:54 PM
+-- Generation Time: May 22, 2017 at 07:28 AM
 -- Server version: 10.1.13-MariaDB
--- PHP Version: 5.6.21
+-- PHP Version: 5.6.23
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -50,7 +50,7 @@ CREATE TABLE `followers` (
 --
 
 INSERT INTO `followers` (`followerID`, `followingID`) VALUES
-('test', 'link182');
+('username', 'link182');
 
 -- --------------------------------------------------------
 
@@ -74,8 +74,8 @@ CREATE TABLE `members` (
 --
 
 INSERT INTO `members` (`Username`, `Email`, `Password`, `ClientImage`, `Description`, `Admin`, `followers`, `following`) VALUES
-('Link182', 'jacobcoorey@gmail.com', '$2y$10$DYyvMNNqz0/13Q57yshqJeI4GBbHK9pb9ndFLMnl68hwKcVyZ/2Hy', '', NULL, 0, 1, 0),
-('test', 'test@gmail.com', '$2y$10$/qjvMTthSRt29tsg9r4DJOvN9LxbzefEGJkrxKdx2xvou4DS/CAWe', '', NULL, 0, 0, 1);
+('Link182', 'jacobcoorey@gmail.com', '$2y$10$DYyvMNNqz0/13Q57yshqJeI4GBbHK9pb9ndFLMnl68hwKcVyZ/2Hy', '../images/profile_images/link182.jpg', NULL, 0, 1, 0),
+('username', 'test@email.com', '$2y$10$cywwuQ2Suf6JIWPV6tolVOj4gFh4de/bF8E0DR2bq/BHQ8wXw6wW2', '', NULL, 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -109,7 +109,7 @@ CREATE TABLE `videos` (
 --
 
 INSERT INTO `videos` (`Vid_ID`, `Username`, `Vid_name`, `Vid_url`, `Vid_description`, `Date_added`) VALUES
-(1, 'link182', 'test.mp4', 'videos/uploads/Mzc3Mjcx.mp4', 'jhjh', 1495370740);
+(14, 'link182', 'League of Legends 05-03-2017 1', 'videos/uploads/NzUwNjU0.mp4', 'Video Description', 1495430031);
 
 --
 -- Indexes for dumped tables
@@ -127,7 +127,9 @@ ALTER TABLE `comments`
 -- Indexes for table `followers`
 --
 ALTER TABLE `followers`
-  ADD PRIMARY KEY (`followerID`,`followingID`);
+  ADD PRIMARY KEY (`followerID`,`followingID`),
+  ADD KEY `followerID` (`followerID`),
+  ADD KEY `following_delete` (`followingID`);
 
 --
 -- Indexes for table `members`
@@ -157,7 +159,7 @@ ALTER TABLE `videos`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `Comment_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Comment_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `sessions`
 --
@@ -167,7 +169,7 @@ ALTER TABLE `sessions`
 -- AUTO_INCREMENT for table `videos`
 --
 ALTER TABLE `videos`
-  MODIFY `Vid_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Vid_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- Constraints for dumped tables
 --
@@ -177,6 +179,13 @@ ALTER TABLE `videos`
 --
 ALTER TABLE `comments`
   ADD CONSTRAINT `account_delete_cmnt` FOREIGN KEY (`Username`) REFERENCES `members` (`Username`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `followers`
+--
+ALTER TABLE `followers`
+  ADD CONSTRAINT `follower_delete` FOREIGN KEY (`followerID`) REFERENCES `members` (`Username`) ON DELETE CASCADE,
+  ADD CONSTRAINT `following_delete` FOREIGN KEY (`followingID`) REFERENCES `members` (`Username`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `videos`

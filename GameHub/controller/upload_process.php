@@ -22,8 +22,7 @@ if(isset($_POST['submit_file']))
 }
 
 if(isset($_POST['submit_file']))
-{echo"<br />".$name."has been uploaded";
-  print("<a href='../videos/uploads/{$name}'>Watch it</a>");
+{header('location: /gamehub/view/profile.php');
 } else{
   echo"nope";
 }

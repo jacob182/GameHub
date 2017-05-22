@@ -18,6 +18,24 @@ function delete_comment($commentID)
   return $result;
 }
 
+function delete_video($vidID)
+{
+  //establishing the connection to the database
+  global $conn;
+  //sql value is set to delete product information and connecting values
+  $sql = "DELETE FROM videos WHERE Vid_ID = :vidID";
+  //preparing for sql query
+  $statement = $conn->prepare($sql);
+  //value linked to the correct variable
+  $statement->bindValue(':vidID', $vidID);
+  //result set and executed
+  $result = $statement->execute();
+  //some drivers require this function to create an efficient connection to the server
+  $statement->closeCursor();
+  //result is returned to the database
+  return $result;
+}
+
 function get_comment_count($vidID)
 {
   global $conn;

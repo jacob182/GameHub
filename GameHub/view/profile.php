@@ -7,38 +7,38 @@
 
 	//retrieve the header
 	require('header.php');
-	
+
 	//check if user is logged in/set variables for user data
 	if(isset($_GET['username'])) {
 		$username = $_GET['username'];
 	} else {
 		$username = $_SESSION['user'];
 	}
-	
+
 	//redirect if user does not exist
 	if(!get_member($username)) {
 		header('location:feed.php');
-		
+
 	}
 
 	//Grab user information
 	$user = get_member($username);
-	
+
 	global $conn;
 	$stmt = $conn->prepare("SELECT count(*) FROM `videos` WHERE `Username` = ?");
 	$stmt->execute(array($username));
 	$vidCount = $stmt->fetch();
 	$vidCount = $vidCount['count(*)'];
-	
+
 	//Generate the follow/unfollow link based onif the user has followed the profile
 	if(isLogged()) {
 		$stmt = $conn->prepare("SELECT * FROM `followers` WHERE `followerID` = ? AND `followingID` = ?");
 		$stmt->execute(array($_SESSION['user'], $username));
 		$check = $stmt->fetch();
 		if(!empty($check)) {
-			$followTxt = "<li><a href='../controller/follow_process.php?username={$username}'>Unfollow</a></li>";
+			$followTxt = "<li><a class='follow' href='../controller/follow_process.php?username={$username}'>Unfollow</a></li>";
 		} else {
-			$followTxt = "<li><a href='../controller/follow_process.php?username={$username}'>Follow</a></li>";
+			$followTxt = "<li><a class='follow' href='../controller/follow_process.php?username={$username}'>Follow</a></li>";
 		}
 	}
 
@@ -49,9 +49,12 @@
 	<div class="profile-stats">
 		<ul>
 			<li><?php print($vidCount) ?>    <span>Videos</span></li>
-			<li><?php print($user['followers']) ?> 	<span>Followers</span></li>
-			<li><?php print($user['following']) ?>    <span>Following</span></li>
-			<?php print($followTxt) ?>
+			<li><?php print($user['followers']) ?> 	<a href="" class="follow"><span>Followers</span></a></li>
+			<li><?php print($user['following']) ?>  <a href="" class="follow"><span>Following</span></a></li>
+			<?php
+			if($username != $_SESSION['user']) {
+				print($followTxt);
+			} ?>
 		</ul>
 	</div>
 	<div class="profile-picture-container">
@@ -85,20 +88,28 @@
 		}
 
 		global $conn;
-		//Grab videos using code from the feed file to display on the users profile 
+		//Grab videos using code from the feed file to display on the users profile
 		//with a minor change so that it only shows that users videos
-		$stmt = $conn->prepare("SELECT * FROM `videos` WHERE `Username` = ? LIMIT 5");
+		$stmt = $conn->prepare("SELECT * FROM `videos` WHERE `Username` = ? ORDER BY Date_added DESC LIMIT 5 ");
 		$stmt->execute(array($username));
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		print('</div><div class="feed" style="margin:0 auto;">');
+		print('</div><div class="profile-feed" style="margin:0 auto;">');
 		foreach ($result as $item){
                         echo '<div class="feed-item">
                                  <div class="feed-video">
                                      <video src="../' . $item['Vid_url'] . '" width="100%" controls></video>
                                  </div>
                                 <div class="feed-description">
-                                        <a class="author-avatar" href=""><img class="avatar" src="../images/profile_images/test.jpg" alt="Author Image"></a>
-                                        <p><a class="author-name" href="">' . $item['Username'] . '</a>' . $item['Vid_description'] . '</p>
+                                        <a class="author-avatar" href="/gamehub/view/profile.php?username=' . $item['Username'] . '"><img class="avatar" src="../images/profile_images/test.jpg" alt="Author Image"></a>
+                                        <p><a class="author-name" href="/gamehub/view/profile.php?username=' . $item['Username'] . '">' . $item['Username'] . '</a>' . $item['Vid_description'] . '</p>';
+			                                    if(isLogged()){
+			                                      if($item['Username'] == $_SESSION['user']) {
+			                                        ?>
+			                                        <a href="../controller/delete_video_process.php?vidID=<?php echo $item["Vid_ID"]; ?>" onclick="return confirm('Are you sure you want to delete this video?')">
+			                                          <button class="delete-video">Delete Video</button>
+			                                        </a>
+			                                        <?php }
+			                                    } echo '
                                      </div>
                              	</div>';
 
@@ -139,7 +150,7 @@
                     }
 
               echo' </div>';
-              
+
           if(isLogged()) {
               echo'<form class="comment-form" action="../controller/comment_process.php" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="Vid_ID"  value=' . $item['Vid_ID'] . ' />
@@ -149,12 +160,12 @@
          }
     }
 	print('</div>');
-		
 
-		
+
+
 ?>
 
-	
+
 </div>
   <?php
     //retrieve the footer

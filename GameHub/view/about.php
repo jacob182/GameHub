@@ -24,19 +24,19 @@
 <div class="wrapper">
 				<div class="">
 						 <div class="">
-									<h2>Our Story</h2>
+									<h2>First Title</h2>
 									<p>Integer eget tortor justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia.</p>
 									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit <strong>Ut enim ad minim veniam, quis nostrud</strong> exercitation ullamco.</p>
 						 </div>
 
 						 <div class="">
-									<h2>New Design</h2>
+									<h2>Second Title</h2>
 									<p>Quisque vitae felis eros. Suspendisse quis leo molestie, iaculis sapien id, hendrerit augue. Phasellus fermentum.</p>
 									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit Ut enim ad minim veniam, quis nostrud exercitation.</p>
 						 </div>
 
 						 <div class="">
-									<h2>HTML CSS</h2>
+									<h2>Third Title</h2>
 									<p>Vivamus non scelerisque ex, et interdum leo. In bibendum lacus vitae felis egestas, at consectetur metus facilisis.</p>
 									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit Ut enim ad minim veniam, quis nostrud exercitation.</p>
 						 </div>
