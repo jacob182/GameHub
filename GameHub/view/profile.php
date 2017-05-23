@@ -49,7 +49,7 @@
 	<div class="profile-stats">
 		<ul>
 			<li><?php print($vidCount) ?>    <span>Videos</span></li>
-			<li><?php print($user['followers']) ?> 	<a href="" class="follow"><span>Followers</span></a></li>
+			<li><?php print($user['followers']) ?> 	<a href="/follower" id="followers" class="follow"><span>Followers</span></a></li>
 			<li><?php print($user['following']) ?>  <a href="" class="follow"><span>Following</span></a></li>
 			<?php
 			if($username != $_SESSION['user']) {
@@ -75,6 +75,16 @@
 </div>
 
 <div class="wrapper">
+	<div class="followerspop pop">
+
+    ...list of followers...
+
+    <!-- Add an optional button to close the popup -->
+		<div class="block">
+    	<button class="close" href="/">close</button></p>
+		</div>
+
+  </div>
 <?php
 	//check if user is currently viewing their own profile
 		if(isLogged()) {

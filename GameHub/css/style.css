@@ -73,6 +73,44 @@ nav .wrapper .left ul li a:hover, nav .wrapper .right ul li a:hover {
 
 #clear {clear:both;}
 
+/* JQUERY CSS */
+
+#aboutToggle {
+  width: 100%;
+  padding: 5px;
+  text-align: center;
+  background-color: #75affc;
+  border: solid 1px black;
+}
+#about{
+  background-color:#eee ;
+  display: none;
+}
+.followerspop.div , .followedpop.div {
+  border-bottom: 1px solid #EFEFEF;
+  margin: 8px 0;
+  padding-bottom: 8px;
+}
+.close{
+  float: right;
+}
+.followerspop, .followedpop{
+  margin-left: auto;
+  margin-right: auto;
+  right: 0;
+  left: 0;
+  background-color:#FFFFFF;
+  border:1px solid #999999;
+  cursor:default;
+  display:none;
+  margin-top: 15px;
+  position:absolute;
+  width:400px;
+  padding: 20px 20px 5px 20px;
+}
+
+/* end of JQUERY CSS */
+
 .block{
   display: block;
 }
@@ -91,12 +129,10 @@ nav .wrapper .left ul li a:hover, nav .wrapper .right ul li a:hover {
 text-align: center;
 }
 
-.description-user{
+.about-box{
   text-align: center;
   font-weight: bold;
   margin: 15px 0 15px;
-  width: 20%;
-  float: left;
 }
 .feed{
   width: 75%;
@@ -130,6 +166,20 @@ text-align: center;
   display: flex;
   justify-content: space-around;
   text-align: center;
+}
+.follow-display{
+  width:300px;
+  padding: 10px 5px;
+  display: flex;
+  background-color: #eee;
+  border: 1px solid black;
+}
+.follow-avatar{
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  border: 1px solid #666;
+  border-radius: 50%;
 }
 .settings-avatar{
   border-radius: 50%;
@@ -192,6 +242,7 @@ input, textarea {
   font-family: 'Montserrat', arial, sans-serif;
   text-transform: uppercase;
 }
+
 .loginbtn, .signupbtn{
     display: inline-block;
     border: 1px solid black;
