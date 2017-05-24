@@ -23,7 +23,7 @@
             print('<div class="profile-box">
           <div class="username-wrapper">
             <div id="user-avatar">
-              <img src="../images/profile_images/test.jpg" alt="avatar" width="100%" height="100%">
+              <img src="'. get_avatar() .'" alt="avatar" width="100%" height="100%">
             </div>
                     <a class="username" href="/gamehub/view/profile.php?username=' . $_SESSION['user'] . '">' . $_SESSION['user'] . '</a>
           </div>
@@ -62,25 +62,25 @@
         $result = $statement->fetchAll();
         $statement->closeCursor();
         foreach ($result as $item){
-                        echo '<div class="feed-item">
-                                 <div class="feed-video">
-                                     <video src="../' . $item['Vid_url'] . '" width="100%" controls></video>
-                                 </div>
-                                <div class="feed-description">
-                                  <a class="author-avatar" href="/gamehub/view/profile.php?username=' . $item['Username'] . '"><img class="avatar" src="../images/profile_images/test.jpg" alt="Author Image"></a>
-                                  <p><a class="author-name" href="/gamehub/view/profile.php?username=' . $item['Username'] . '">' . $item['Username'] . '</a>' . $item['Vid_description'] . '</p>';
-                                    if(isLogged()){
-                                      if($item['Username'] == $_SESSION['user']) {
-                                        ?>
-                                        <a href="../controller/delete_video_process.php?vidID=<?php echo $item["Vid_ID"]; ?>" onclick="return confirm('Are you sure you want to delete this video?')">
-                                          <button class="delete-video">Delete Video</button>
-                                        </a>
-                                        <?php }
-                                    } echo '
-                                </div>
-                             	</div>';
+                echo '<div class="feed-item">
+                         <div class="feed-video">
+                            <video src="../' . $item['Vid_url'] . '" width="100%" controls></video>
+                         </div>
+                        <div class="feed-description">
+                          <a class="author-avatar" href="/gamehub/view/profile.php?username=' . $item['Username'] . '"><img class="avatar" src="' . get_avatar($item['Username']) . '" alt="Author Image"></a>
+                          <p><a class="author-name" href="/gamehub/view/profile.php?username=' . $item['Username'] . '">' . $item['Username'] . '</a>' . $item['Vid_description'] . '</p>';
+                            if(isLogged()){
+                              if($item['Username'] == $_SESSION['user']) {
+                                ?>
+                                <a href="../controller/delete_video_process.php?vidID=<?php echo $item["Vid_ID"]; ?>" onclick="return confirm('Are you sure you want to delete this video?')">
+                                  <button class="delete-video">Delete Video</button>
+                                </a>
+                                <?php }
+                            } echo '
+                        </div>
+                     	</div>';
 
-												echo "<div id='comments_{$item['Vid_ID']}'>";
+								echo "<div id='comments_{$item['Vid_ID']}'>";
 
         global $conn;
         $sql = 'SELECT * FROM comments WHERE comments.Vid_ID = :id ORDER BY comments.Date_added LIMIT 0,2';
@@ -94,7 +94,7 @@
           foreach ($result as $item) {
           echo '<div class="comment-list">
             <div class="comment-entry">
-              <a class="author-avatar" href=""><img class="avatar comment-avatar" src="../images/profile_images/test.jpg" alt="Author Image"></a>
+              <a class="author-avatar" href=""><img class="avatar comment-avatar" src="' . get_avatar($item['Username']) . '" alt="Author Image"></a>
               <p><a class="author-name" href="">' . $item['Username'] . '</a>' . $item['Comment_txt'] . '</p>
               ';
               if(isLogged()){
@@ -111,10 +111,10 @@
           }
 
           if($commentCount > 2) {
-                      echo '<div class="more-comments">
-                              <a onClick="showComments(' . $item['Vid_ID'] . ')"> Show All Comments </a>
-                            </div>';
-                    }
+              echo '<div class="more-comments">
+                      <a onClick="showComments(' . $item['Vid_ID'] . ')"> Show All Comments </a>
+                    </div>';
+            }
 
               echo' </div>';
 

@@ -10,10 +10,11 @@
 ?>
 
 <h1>Sign Up</h1>
+
 <div class="login-container">
 
   <div id="login">
-    <form action="../controller/registration_process.php" method="post">
+    <form action="../controller/registration_process.php" method="post" onsubmit="return register();" novalidate>
 
       <div class="field-wrap">
         <label> Username*</label>
@@ -40,7 +41,7 @@
         <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password*" required pattern=".{7,}"/>
       </div>
 
-      <button class="signupbtn" name="register"/>Sign Up</button>
+      <input type="submit" class="signupbtn" value = "Sign Up" />
 
     </form>
 

@@ -1,4 +1,6 @@
 <?php
+ini_set('display_errors',1);
+	error_reporting(E_ALL);
 	//start session management
 	session_start();
 	//provide the value of the $title variable for this page
@@ -28,7 +30,7 @@
 
 		<div class="field-wrap">
 			<label class="edit-profile-heading">Username</label></br>
-			<span class="edit-username">Link182</span>
+			<span class="edit-username"><?php print($_SESSION['user']); ?></span>
 			<input type="hidden" name="username" value="<?php echo $_SESSION['user'] ?>" />
 		</div>
 

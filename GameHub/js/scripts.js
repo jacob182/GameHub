@@ -31,6 +31,7 @@ function edit_password() {
 
 }
 
+
 function showComments(VidID) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
@@ -49,7 +50,7 @@ function showComments(VidID) {
         comment.setAttribute('id', comments[i].Comment_ID);
         comment.setAttribute('class', 'comment-entry');
 
-        comment.innerHTML = '<a class="author-avatar" href=""><img class="avatar comment-avatar" src="../images/profile_images/test.jpg" alt="Author Image"></a><p><a class="author-name" href="">' + comments[i].Username + '</a>' + comments[i].Comment_txt + '</p>';
+        comment.innerHTML = '<a class="author-avatar" href=""><img class="avatar comment-avatar" src="' + comments[i].ClientImage + '" alt="Author Image"></a><p><a class="author-name" href="">' + comments[i].Username + '</a>' + comments[i].Comment_txt + '</p>';
         if(comments[i].owned == 1) {
             comment.innerHTML += '<a href="../controller/delete_comment_process.php?commentID=' + comments[i].Comment_ID + '" onclick="return confirm(\'Are you sure you want to delete this comment?\')"><button class="delete-comment">X</button></a>';
         }

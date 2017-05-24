@@ -139,6 +139,15 @@
 	  return $count;
 
 	}
+	
+	function get_avatar($username = null) {
+		if($username === null) $username = $_SESSION['user'];
+		$user = get_member($username);
+		if(empty($user['ClientImage'])) {
+			return "../images/default.jpg";
+		} 
+		return $user['ClientImage'];
+	}
 
 		function delete_profile()
 	{

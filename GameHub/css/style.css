@@ -549,6 +549,10 @@ footer .wrapper .right form input[type='submit'] {
   }
 }
 
+.pop {
+	z-index:10;
+}
+
 @media all and (max-width:600px) {
   #logo {float:none;}
   nav {height:auto;}

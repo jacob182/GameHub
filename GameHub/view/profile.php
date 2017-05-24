@@ -30,8 +30,8 @@
 	$vidCount = $stmt->fetch();
 	$vidCount = $vidCount['count(*)'];
 
-	//Generate the follow/unfollow link based onif the user has followed the profile
-	if(isLogged()) {
+	//Generate the follow/unfollow link based on if the user has followed the profile
+	if(isLogged() && $username != $_SESSION['user']) {
 		$stmt = $conn->prepare("SELECT * FROM `followers` WHERE `followerID` = ? AND `followingID` = ?");
 		$stmt->execute(array($_SESSION['user'], $username));
 		$check = $stmt->fetch();
@@ -58,7 +58,7 @@
 		</ul>
 	</div>
 	<div class="profile-picture-container">
-		<a href="edit_profile.php"><figure class="profile-picture" style="background-image: url('../images/profile_images/test.jpg')"></figure></a>
+		<a href="edit_profile.php"><figure class="profile-picture" style="background-image: url('<?php print get_avatar($username); ?>')"></figure></a>
 	</div>
 
 	<h1><?php echo $username ?></h1>
@@ -76,8 +76,14 @@
 
 <div class="wrapper">
 	<div class="followerspop pop">
-
-    ...list of followers...
+	<?php
+		$stmt = $conn->prepare("select * from `followers` WHERE `followingID` = ?");
+		$stmt->execute(array($username));
+		$followers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		foreach($followers as $follower) {
+			print("{$follower['followerID']}<br />");
+		}
+	?>
 
     <!-- Add an optional button to close the popup -->
 		<div class="block">
@@ -98,8 +104,6 @@
 		}
 
 		global $conn;
-		//Grab videos using code from the feed file to display on the users profile
-		//with a minor change so that it only shows that users videos
 		$stmt = $conn->prepare("SELECT * FROM `videos` WHERE `Username` = ? ORDER BY Date_added DESC LIMIT 5 ");
 		$stmt->execute(array($username));
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -109,9 +113,9 @@
                                  <div class="feed-video">
                                      <video src="../' . $item['Vid_url'] . '" width="100%" controls></video>
                                  </div>
-                                <div class="feed-description">
-                                        <a class="author-avatar" href="/gamehub/view/profile.php?username=' . $item['Username'] . '"><img class="avatar" src="../images/profile_images/test.jpg" alt="Author Image"></a>
-                                        <p><a class="author-name" href="/gamehub/view/profile.php?username=' . $item['Username'] . '">' . $item['Username'] . '</a>' . $item['Vid_description'] . '</p>';
+																 <div class="feed-description">
+	 				                          <a class="author-avatar" href="/gamehub/view/profile.php?username=' . $item['Username'] . '"><img class="avatar" src="' . get_avatar($item['Username']) . '" alt="Author Image"></a>
+	 				                          <p><a class="author-name" href="/gamehub/view/profile.php?username=' . $item['Username'] . '">' . $item['Username'] . '</a>' . $item['Vid_description'] . '</p>';
 			                                    if(isLogged()){
 			                                      if($item['Username'] == $_SESSION['user']) {
 			                                        ?>
@@ -170,8 +174,6 @@
          }
     }
 	print('</div>');
-
-
 
 ?>
 

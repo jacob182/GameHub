@@ -33,24 +33,14 @@
       exit();
     }
   else {
-    $message = "Profile ";
     $result = edit_profile($email, $username);
       if($result) {
-        $_SESSION['success'] = $message . 'successfully updated';
+        $_SESSION['success'] = 'profile successfully updated';
       }
     if(!empty($oldPassword) && !empty($newPassword) && !empty($confirmNewPassword)) {
-    edit_password($oldPassword, $newPassword, $confirmNewPassword);
-
-  if(empty($password, $newpassword, $confirmnewpassword))
-  $result = edit_profile($email, $username);
-    if($result) {
-      $_SESSION['success'] = 'profile successfully updated';
-      header("location:../view/edit_profile.php");
-
-    }
-
-  header("location:../view/edit_profile.php");
+		edit_password($oldPassword, $newPassword, $confirmNewPassword);
+	}
 
 }
-
+header("location:../view/edit_profile.php");
 ?>
