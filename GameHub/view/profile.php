@@ -7,7 +7,7 @@
 
 	//retrieve the header
 	require('header.php');
-
+	if (!isLogged ()) header ('location: feed.php');
 	//check if user is logged in/set variables for user data
 	if(isset($_GET['username'])) {
 		$username = $_GET['username'];
@@ -50,7 +50,7 @@
 		<ul>
 			<li><?php print($vidCount) ?>    <span>Videos</span></li>
 			<li><?php print($user['followers']) ?> 	<a href="/follower" id="followers" class="follow"><span>Followers</span></a></li>
-			<li><?php print($user['following']) ?>  <a href="" class="follow"><span>Following</span></a></li>
+			<li><?php print($user['following']) ?>  <a href="/following" id="following" class="follow"><span>Following</span></a></li>
 			<?php
 			if($username != $_SESSION['user']) {
 				print($followTxt);
@@ -73,15 +73,25 @@
 
 
 </div>
-
+<div class="viderror">
+	<?php
+	if(isset($_SESSION['error']) && !empty($_SESSION['error'])) {
+		print($_SESSION['error']);
+		$_SESSION['error'] = '';
+	}
+	?>
+</div>
 <div class="wrapper">
-	<div class="followerspop pop">
+	<div class="followerspop fspop">
 	<?php
 		$stmt = $conn->prepare("select * from `followers` WHERE `followingID` = ?");
 		$stmt->execute(array($username));
 		$followers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		foreach($followers as $follower) {
-			print("{$follower['followerID']}<br />");
+			print('	<div class="follow-display">
+								<a class="author-avatar"> <img class="follow-avatar" src="' . get_avatar($follower['followerID']) . '" alt="Author Image"></a>');
+								echo" <a class='author-name'> {$follower["followerID"]} </a><br />
+							</div>";
 		}
 	?>
 
@@ -91,7 +101,24 @@
 		</div>
 
   </div>
-<?php
+	<div class="followedpop fdpop">
+	<?php
+		$stmt = $conn->prepare("select * from `followers` WHERE `followerID` = '$username'");
+		$stmt->execute(array($username));
+		$followers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		foreach($followers as $follower) {
+			print("{$follower['followingID']}<br />");
+		}
+	?>
+
+    <!-- Add an optional button to close the popup -->
+		<div class="block">
+    	<button class="close" href="/">close</button></p>
+		</div>
+
+  </div>
+	<?php
+
 	//check if user is currently viewing their own profile
 		if(isLogged()) {
 			if($username == $_SESSION['user']) {
@@ -115,7 +142,7 @@
                                  </div>
 																 <div class="feed-description">
 	 				                          <a class="author-avatar" href="/gamehub/view/profile.php?username=' . $item['Username'] . '"><img class="avatar" src="' . get_avatar($item['Username']) . '" alt="Author Image"></a>
-	 				                          <p><a class="author-name" href="/gamehub/view/profile.php?username=' . $item['Username'] . '">' . $item['Username'] . '</a>' . $item['Vid_description'] . '</p>';
+	 				                          <p class="mt9"><a class="author-name" href="/gamehub/view/profile.php?username=' . $item['Username'] . '">' . $item['Username'] . '</a>' . $item['Vid_description'] . '</p>';
 			                                    if(isLogged()){
 			                                      if($item['Username'] == $_SESSION['user']) {
 			                                        ?>
@@ -139,11 +166,11 @@
         $commentCount = intVal(get_comment_count($item['Vid_ID'])['commentCount']);
 
           foreach ($result as $item) {
-          echo '<div class="comment-list">
-            <div class="comment-entry">
-              <a class="author-avatar" href=""><img class="avatar comment-avatar" src="../images/profile_images/test.jpg" alt="Author Image"></a>
-              <p><a class="author-name" href="">' . $item['Username'] . '</a>' . $item['Comment_txt'] . '</p>
-              ';
+						echo '<div class="comment-list">
+	            <div class="comment-entry">
+	              <a class="author-avatar" href=""><img class="avatar comment-avatar" src="' . get_avatar($item['Username']) . '" alt="Author Image"></a>
+	              <p class="mt4"><a class="author-name" href="">' . $item['Username'] . '</a>' . $item['Comment_txt'] . '</p>
+	              ';
               if(isLogged()){
                 if($item['Username'] == $_SESSION['user']) {
                   ?>

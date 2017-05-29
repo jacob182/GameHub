@@ -7,6 +7,50 @@
     //retrieve the header
     require('header.php');
 ?>
+
+<div class="wrapper">
+  <?php
+
+  if(isLogged()) {
+    $username = $_SESSION['user'];
+    $user = get_member($username);
+
+    global $conn;
+    $stmt = $conn->prepare("SELECT count(*) FROM `videos` WHERE `Username` = ?");
+    $stmt->execute(array($username));
+    $vidCount = $stmt->fetch();
+    $vidCount = $vidCount['count(*)'];
+      print('<div class="profile-boxmb">
+    <div class="username-wrapper">
+      <div id="user-avatar">
+        <img src="'. get_avatar() .'" alt="avatar" width="100%" height="100%">
+      </div>
+              <a class="username" href="/gamehub/view/profile.php?username=' . $_SESSION['user'] . '">' . $_SESSION['user'] . '</a>
+    </div>
+    <button class="profile-signoutmb" onclick="window.location.href=`signout.php`">Sign out</button>
+    <div class="user-stats">
+      <div>
+        <div><a class="follow bold" href="profile.php">Videos</a></div></br>
+        <div>' . $vidCount . '</div>
+      </div>
+      <div>
+        <div><a class="follow bold" href="profile.php">Followers</a></div></br>
+        <div>' . $user['followers'] . '</div>
+        </div>
+      <div>
+        <div><a class="follow bold" href="profile.php">Followed</a></div></br>
+        <div>' . $user['following'] . '</div>
+      </div>
+          </div>
+      </div>');
+  } else {
+      print("<div class='signup-boxmb'>
+                      <h3> Welcome</br> Please login</h3>
+                      <button class='profile-login' onclick='window.location.href=`login.php`'>Login</button>
+                      </div>");
+  }
+  ?>
+</div>
 <div class="wrapper">
   <div class="profile">
         <?php
@@ -34,11 +78,11 @@
               <div>' . $vidCount . '</div>
             </div>
             <div>
-              <div><a class="follow bold" href="#">Followers</a></div></br>
+              <div><a class="follow bold" href="profile.php">Followers</a></div></br>
               <div>' . $user['followers'] . '</div>
               </div>
             <div>
-              <div><a class="follow bold" href="#">Followed</a></div></br>
+              <div><a class="follow bold" href="profile.php">Followed</a></div></br>
               <div>' . $user['following'] . '</div>
             </div>
                 </div>
@@ -46,7 +90,7 @@
         } else {
             print("<div class='signup-box'>
                             <h3> Welcome</br> Please login</h3>
-                            <button class='profile-login'><a href='login.php'>Login</a></button>
+                            <button class='profile-login' onclick='window.location.href=`login.php`'>Login</button>
                             </div>");
         }
         ?>
@@ -68,11 +112,11 @@
                          </div>
                         <div class="feed-description">
                           <a class="author-avatar" href="/gamehub/view/profile.php?username=' . $item['Username'] . '"><img class="avatar" src="' . get_avatar($item['Username']) . '" alt="Author Image"></a>
-                          <p><a class="author-name" href="/gamehub/view/profile.php?username=' . $item['Username'] . '">' . $item['Username'] . '</a>' . $item['Vid_description'] . '</p>';
+                          <p class="mt9"><a class="author-name" href="/gamehub/view/profile.php?username=' . $item['Username'] . '">' . $item['Username'] . '</a>' . $item['Vid_description'] . '</p>';
                             if(isLogged()){
                               if($item['Username'] == $_SESSION['user']) {
                                 ?>
-                                <a href="../controller/delete_video_process.php?vidID=<?php echo $item["Vid_ID"]; ?>" onclick="return confirm('Are you sure you want to delete this video?')">
+                                <a  href="../controller/delete_video_process.php?vidID=<?php echo $item["Vid_ID"]; ?>" onclick="return confirm('Are you sure you want to delete this video?')">
                                   <button class="delete-video">Delete Video</button>
                                 </a>
                                 <?php }
@@ -95,7 +139,7 @@
           echo '<div class="comment-list">
             <div class="comment-entry">
               <a class="author-avatar" href=""><img class="avatar comment-avatar" src="' . get_avatar($item['Username']) . '" alt="Author Image"></a>
-              <p><a class="author-name" href="">' . $item['Username'] . '</a>' . $item['Comment_txt'] . '</p>
+              <p class="mt4"><a class="author-name" href="">' . $item['Username'] . '</a>' . $item['Comment_txt'] . '</p>
               ';
               if(isLogged()){
                 if($item['Username'] == $_SESSION['user']) {

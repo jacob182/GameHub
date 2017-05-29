@@ -15,10 +15,19 @@
 
   <div id="login">
     <form action="../controller/registration_process.php" method="post" onsubmit="return register();" novalidate>
-
+		<?php
+			if(isset($_SESSION['error']) && !empty($_SESSION['error'])) {
+				print($_SESSION['error']);
+				$_SESSION['error'] = '';
+			} else if(isset($_SESSION['success']) && !empty($_SESSION['success'])) {
+				print($_SESSION['sccess']);
+				$_SESSION['success'] = '';
+			}
+		?>
+		<div id="errorAnchor"></div>
       <div class="field-wrap">
         <label> Username*</label>
-        <input type="text" id="username" name="username" placeholder="Enter username"/>
+        <input type="text" id="username" name="username" placeholder="Enter username" required/>
       </div>
 
       <div class="field-wrap">
@@ -44,16 +53,9 @@
       <input type="submit" class="signupbtn" value = "Sign Up" />
 
     </form>
-
+		<a class="redirect" href='login.php'>Already registered? Login Now!</a>
   </div>
 </div>
-<?php
-if(isset($_SESSION['error']))
-	print($_SESSION['error']);
-
-elseif(isset($_SESSION['success']))
-	print($_SESSION['success']);
- ?>
 <?php
   //retrieve the footer
   require('footer.php');

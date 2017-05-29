@@ -4,8 +4,20 @@ $(document).ready(function(){
     });
 });
 
+$(document).ready(function(){
+    $("#meToggle").click(function(){
+        $("#aboutme").slideToggle("slow");
+    });
+});
+
+function deselect1(e) {
+  $('.fspop').slideFadeToggle(function() {
+    e.removeClass('selected');
+  });
+}
+
 function deselect(e) {
-  $('.pop').slideFadeToggle(function() {
+  $('.fdpop').slideFadeToggle(function() {
     e.removeClass('selected');
   });
 }
@@ -13,16 +25,29 @@ function deselect(e) {
 $(function() {
   $('#followers').on('click', function() {
     if($(this).hasClass('selected')) {
+      deselect1($(this));
+    } else {
+      $(this).addClass('selected');
+      $('.fspop').slideFadeToggle();
+	  if($("#following").hasClass('selected')) deselect($('#following'));
+    }
+    return false;
+  });
+
+  $('#following').on('click', function() {
+    if($(this).hasClass('selected')) {
       deselect($(this));
     } else {
       $(this).addClass('selected');
-      $('.pop').slideFadeToggle();
+      $('.fdpop').slideFadeToggle();
+	  if($("#followers").hasClass('selected')) deselect1($('#followers'));
     }
     return false;
   });
 
   $('.close').on('click', function() {
-    deselect($('#followers'));
+	if($("#followers").hasClass('selected')) deselect1($('#followers'));
+	if($("#following").hasClass('selected')) deselect($('#following'));
     return false;
   });
 });
@@ -33,28 +58,60 @@ $.fn.slideFadeToggle = function(easing, callback) {
 
 function register(){
 	var username = document.getElementById('username');
-	var email = document.getElementById('emaail');
+	var email = document.getElementById('email');
 	var emailConf = document.getElementById('confirm-email');
-	var password = document.getElementById('password');
+	var pass = document.getElementById('password');
 	var passwordConf = document.getElementById('confirm-password');
+  var emailpatt = new regex ('/^(([^<>()[]\.,;:s@"]+(.[^<>()[]\.,;:s@"]+)*)|(".+"))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/');
+  var passpatt = new regex('.{7,}');
+  var userpatt = new regex('^(?=(?![0-9])?[A-Za-z0-9]?[._-]?[A-Za-z0-9]+).{3,20}');
 
-	if(username.value == '' || email.value == '' || emailConf.value == '' || password.value == '' || passwordConf.value == '') {
-		alert('All fields are required!');
+	if(username.value == '' || email.value == '' || emailConf.value == '' || pass.value == '' || passwordConf.value == '') {
+		errorAnchor.innerHTML = 'All fields are required!';
 	} else {
-		//Check if username already exists in database
+
 		$.ajax({
 		  url: "handler.php?action=usernameTest&username=" + username.value
 		}).done(function(data) {
 		  if(data == 1) {
-			  alert('That username is already in use!');
-
+			  errorAnchor.innerHTML = 'That username is already in use!';
+				return false;
 		  }
-		  alert(data);
 		});
-		// additional testing here
 
+    $.ajax({
+		  url: "handler.php?action=emailTest&email=" + email.value
+		}).done(function(data) {
+		  if(data == 1) {
+			  errorAnchor.innerHTML = 'That email is already in use!';
+				return false;
+		  }
+		});
 
-
+    if (email.value == emailpatt.test(email.value)){
+    errorAnchor.innerHTML = 'Please enter a valid email address.';
+    return false;
+    }
+    if (username.value == userpatt.test(username.value))
+    {
+    errorAnchor.innerHTML = 'Please enter a valid username (min 2 - max 12 characters).';
+    return false;
+    }
+    if (pass.value == passpatt.test(pass.value))
+    {
+    errorAnchor.innerHTML = 'Please enter a valid password (atleast 7 characters).';
+    return false;
+    }
+    if (pass.value != passwordConf.value)
+    {
+      errorAnchor.innerHTML = 'Please enter the same password.';
+      return false;
+    }
+    if (email.value != emailConf.value)
+    {
+      errorAnchor.innerHTML = 'Please enter the same email address.';
+      return false;
+    }
 		//if no errors
 		return true;
 	}

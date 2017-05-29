@@ -17,19 +17,18 @@
 
 //validation
 
-if (strlen($password) < 7)
+if (empty($email) || empty($username) || empty($password))
+{
+	$_SESSION['error'] = 'All fields are required!';
+	header("location:../view/signup.php");
+	exit();
+}
+elseif (strlen($password) < 7)
 	{
 		$_SESSION['error'] = 'Password must be 7 characters or more.';
 		header("location:../view/signup.php");
 		exit();
 	}
-
-elseif (empty($email) || empty($username) || empty($password))
-{
-	$_SESSION['error'] = 'All * fields are required.';
-	header("location:../view/signup.php");
-	exit();
-}
 
 elseif ($email != $confirmemail)
 {
@@ -40,7 +39,6 @@ elseif ($email != $confirmemail)
 
 elseif ($password != $confirmpassword)
 {
-
 $_SESSION['error'] = 'Please enter the same password.';
 header("location:../view/signup.php");
 exit();
@@ -69,14 +67,14 @@ $count = count_username($username);
     	//create user messages
     	if($result)
     	{
-    		//if product is successfully added, create a success message
+    		//create a success message
     		$_SESSION['success'] = 'Thank you for creating an account. Please login.';
     		//redirect to products.php
     		header('location:../view/login.php');
     	}
     	else
     	{
-    		//if product is not successfully added, create an error message
+    		//create an error message
     		$_SESSION['error'] = 'An error has occurred. Please try again.';
 				var_dump($result);
     		//redirect to signup.php

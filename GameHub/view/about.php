@@ -17,10 +17,17 @@
     <img class="imageSlides" src="..\images\overwatch_slide.jpg"
     style="width:100%">
   </div>
-  <div class="about-content">
-    <h1>About Us</h1>
-  </div>
 </div>
+<div class="about-content">
+	<h1>About Me</h1>
+</div>
+<div class="block wrapper">
+	<div class="about-box">
+		<h2>Where can you find me?</h2>
+		<p>My in game name is <strong>Link182</strong> and you can see my stats, match history and other information at: <a class="redirect" href="https://oce.op.gg/summoner/userName=link182">Link182</a></p>
+	</div>
+</div>
+
 <div class="wrapper block">
 	<div id="aboutToggle">Click here to discover what we're about.</div>
 	<div id="about">
@@ -31,16 +38,25 @@
 	 	</div>
 
 		<div class="about-box">
-					<h2>Bantz</h2>
-					<p>Quisque vitae felis eros. Suspendisse quis leo molestie, iaculis sapien id, hendrerit augue. Phasellus fermentum.</p>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit Ut enim ad minim veniam, quis nostrud exercitation.</p>
-		 </div>
+			<h2>Bantz Gaming Community</h2>
+			<p>Pretty toxic environment to be honest, few gems in the bunch but you find some so so people.</p>
+			<p>This is not the Bantz community. This is a place of piece, keep it that way.</p>
+		</div>
 
-		 <div class="about-box">
-					<h2>Rules</h2>
-					<p>Vivamus non scelerisque ex, et interdum leo. In bibendum lacus vitae felis egestas, at consectetur metus facilisis.</p>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit Ut enim ad minim veniam, quis nostrud exercitation.</p>
+		<div class="about-box">
+			<h2>Rules</h2>
+			<p>Rules?</p>
+			<p>Don't break my site lul.</p>
 		 </div>
+	 </div>
+
+	 <div id="meToggle">Click here to see Link182 himself.</div>
+	 <div id="aboutme">
+		 <div class="about-box">
+ 			<h2>Link182</h2>
+ 			<img class="challenger" src="..\images\challenger.png">
+ 			<p>Basically challenger so if you think otherwise... <strong>B A N N E D.</strong> No questions asked.</p>
+ 	 	</div>
 	 </div>
 </div>
   <?php

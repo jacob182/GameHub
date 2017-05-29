@@ -1,13 +1,13 @@
 <?php
 	session_start();
-  if(!isset($_GET['action'])) die('Cannot directly access this file!');
+  if(!isset($_GET['action'])) die(header('location: /gamehub/view/profile.php'));
   include('../model/database.php');
   include('../model/function_members.php');
   global $conn;
   switch($_GET['action']) {
     case "comments":
       if(!isset($_GET['Vid_ID'])) die('Improper usage!');
-      
+
       $stmt = $conn->prepare("SELECT * FROM `comments` WHERE `Vid_ID` = ? ORDER BY `Date_added`");
       $stmt->execute(array($_GET['Vid_ID']));
 
@@ -21,7 +21,7 @@
 				  $results[$i]['owned'] = 1;
 			  }
 		  }
-	  
+
 		//Append avatar url to comments
 		$results[$i]['ClientImage'] = get_avatar($results[$i]['Username']);
 	  }
@@ -30,14 +30,21 @@
 
        print($response);
       break;
-	  
+
 	case "usernameTest":
 		$stmt = $conn->prepare("SELECT * FROM `members` WHERE `Username` = ?");
 		$stmt->execute(array($_GET['username']));
 		$result = $stmt->fetch(PDO::FETCH_ASSOC);
 		print empty($result) ? 0 : 1;
 		break;
-	
+
+	case "emailTest":
+		$stmt = $conn->prepare("SELECT * FROM `members` WHERE `Email` = ?");
+		$stmt->execute(array($_GET['email']));
+		$result = $stmt->fetch(PDO::FETCH_ASSOC);
+		print empty($result) ? 0 : 1;
+		break;
+
     default:
       print("improper usage!");
       break;

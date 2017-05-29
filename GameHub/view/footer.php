@@ -5,9 +5,9 @@
         <img src="../images/logo.png" alt="Game Hub" width="150" height="40" />
       </a>
       <ul>
-        <li><a href="#">Home · </a></li>
-        <li><a href="#">Blog · </a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="feed.php">Home · </a></li>
+        <li><a href="https://oce.op.gg/summoner/userName=link182">OP.GG · </a></li>
+        <li><a href="about.php">Contact</a></li>
       </ul>
       <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 <input type="hidden" name="cmd" value="_s-xclick">
@@ -20,16 +20,25 @@
       <span id="copyright">GameHub &copy; 2017</span>
       <div class="footer-icons">
         <a href="https://www.facebook.com/ajacobfull"><i class="fa fa-facebook"></i></a>
-        <a href="#"><i class="fa fa-twitter"></i></a>
+        <a href="https://twitter.com/JDChaotic"><i class="fa fa-twitter"></i></a>
         <a href="https://github.com/jacob182"><i class="fa fa-github"></i></a>
       </div>
     </div>
     <div class="right">
       <h3>Contact Us</h3>
-      <form>
+	  <?php
+		if(isset($_SESSION['emailError']) && !empty($_SESSION['emailError'])) {
+			print($_SESSION['emailError']);
+			$_SESSION['emailError'] = '';
+		} else if(isset($_SESSION['emailSuccess']) && !empty($_SESSION['emailSuccess'])) {
+			print($_SESSION['emailSuccess']);
+			$_SESSION['emailSuccess'] = '';
+		}
+	  ?>
+      <form method="POST" action="../controller/contact_process.php">
         <input type="email" name="email" placeholder="Email" />
         <textarea name="message" placeholder="Message"></textarea>
-        <input type="submit" value="Send" />
+        <input type="submit" name="submit" value="Send" />
 
       </form>
     </div>

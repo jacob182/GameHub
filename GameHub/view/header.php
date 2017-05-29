@@ -7,10 +7,10 @@
 	echo $title ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!--  <noscript>
-          <META HTTP-EQUIV="Refresh" CONTENT="0;URL=ShowErrorPage.php">
-        </noscript>
-  -->
+    <noscript>
+      <META HTTP-EQUIV="Refresh" CONTENT="0;URL=ShowErrorPage.php">
+    </noscript>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="../js/scripts.js"></script>
     <script type="text/javascript" src="../js/jquery.js"></script>
@@ -31,13 +31,20 @@
             <img src="../images/logo.png" alt="Game Hub" width="150" height="40" />
           </a>
           <ul>
-            <li><a href="feed.php">Video Feed</a></li>
-            <li><a href="#">Followed</a></li>
+            <li><a href="feed.php">Discover</a></li> -
             <?php
             if(isLogged()) {
-              print("<li><a href='profile.php'>Profile</a></li>");
+              print("<li><a href='your_feed.php'>Your Feed</a></li> -");
             } else {
-              print("<li><a href='login.php'>Profile</a></li>");
+              print("<li><a href='login.php'>Your Feed</a></li> -");
+            }
+            ?>
+
+            <?php
+            if(isLogged()) {
+              print("<li><a href='profile.php'>Profile</a></li> -");
+            } else {
+              print("<li><a href='login.php'>Profile</a></li> -");
             }
             ?>
             <li><a href="about.php">About Us</a></li>

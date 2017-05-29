@@ -8,13 +8,8 @@
 	//retrieve the header
 	require('header.php');
 ?>
-
-yeah nah this isnt a thing yet
-<div class="wrapper">
-	<div class="follow-display">
-		<a class="author-avatar"><img class="follow-avatar" src="../images/profile_images/test.jpg" alt="Author Image"></a>
-		<p><a class="author-name">USERNAME HERE </a> </p>
-	</div>
+<div class="wrapper njc">
+<p>Probs not what you're looking for try clicking <a class="bold" href="feed.php">here.</a></p>
 </div>
 <?php
   //retrieve the footer

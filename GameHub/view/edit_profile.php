@@ -7,8 +7,8 @@ ini_set('display_errors',1);
 	$title = "Profile Edit";
 	require('../model/database.php');
 	require('header.php');
+	if (!isLogged ()) header ('location: feed.php');
 	$result = get_member($_SESSION['user']);
-
 ?>
 <h1> Edit Profile </h1>
 <div class="wrapper">

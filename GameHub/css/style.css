@@ -33,7 +33,9 @@ nav .wrapper .left {
   margin-top: 15px;
   display: flex;
   justify-content: space-between;
-
+}
+.njc{
+  justify-content: flex-start;
 }
 nav .wrapper, footer .wrapper {
   display:flex;
@@ -47,7 +49,6 @@ nav .wrapper .left ul, nav .wrapper .right ul {
   width:100%;
   margin:11px 10px 10px 60px;
   padding:0px;
-
 }
 nav .wrapper .left ul li, nav .wrapper .right ul li {
   display:inline;
@@ -69,6 +70,13 @@ nav .wrapper .left ul li a:hover, nav .wrapper .right ul li a:hover {
   border-radius:3px;
   font-weight:bold;
 }
+.signupmb{
+  background:#3a3c3e;
+  padding:10px 15px;
+  margin-left:10px;
+  border-radius:3px;
+  font-weight:bold;
+}
 #logo {float:left;}
 
 #clear {clear:both;}
@@ -76,7 +84,6 @@ nav .wrapper .left ul li a:hover, nav .wrapper .right ul li a:hover {
 /* JQUERY CSS */
 
 #aboutToggle {
-  width: 100%;
   padding: 5px;
   text-align: center;
   background-color: #75affc;
@@ -85,6 +92,22 @@ nav .wrapper .left ul li a:hover, nav .wrapper .right ul li a:hover {
 #about{
   background-color:#eee ;
   display: none;
+}
+#meToggle {
+  margin-top: 30px;
+  padding: 5px;
+  text-align: center;
+  background-color: #75affc;
+  border: solid 1px black;
+}
+#aboutme{
+  background-color:#eee ;
+  display: none;
+}
+.about-box{
+  text-align: center;
+  font-weight: bold;
+  margin: 0 0 15px;
 }
 .followerspop.div , .followedpop.div {
   border-bottom: 1px solid #EFEFEF;
@@ -117,7 +140,12 @@ nav .wrapper .left ul li a:hover, nav .wrapper .right ul li a:hover {
 .profile{
   width: 25%;
 }
-
+.mt9{
+  margin-top: 9px;
+}
+.mt4{
+  margin-top: 4px;
+}
 .profile-box, .signup-box{
   width: 80%;
   margin: 0 auto;
@@ -128,11 +156,12 @@ nav .wrapper .left ul li a:hover, nav .wrapper .right ul li a:hover {
 .signup-box{
 text-align: center;
 }
-
-.about-box{
+.profile-boxmb, .signup-boxmb{
+  width: 100%;
+  background-color: #fff;
+  display: none;
   text-align: center;
-  font-weight: bold;
-  margin: 15px 0 15px;
+  padding-bottom: 5px;
 }
 .feed{
   width: 75%;
@@ -148,6 +177,10 @@ text-align: center;
 .feed-description{
   padding: 10px;
   display: flex;
+}
+.viderror{
+  margin: 0 auto;
+  max-width: 1000px;
 }
 .username-wrapper{
   padding-top: 5px;
@@ -229,20 +262,29 @@ input, textarea {
   padding: 20px 55px;
 }
 .profile-login{
-  display: inline-block;
   border: 1px solid black;
   color: #000;
   border-radius: 3px;
   background-color: #f90;
   font-size: 17px;
   font-weight: bold;
-  text-decoration: underline;
   padding: 8px 20px;
   text-decoration: none;
   font-family: 'Montserrat', arial, sans-serif;
   text-transform: uppercase;
 }
-
+.profile-signoutmb{
+  border: 1px solid black;
+  color: #000;
+  border-radius: 3px;
+  background-color: #f90;
+  font-size: 17px;
+  font-weight: bold;
+  padding: 8px 20px;
+  text-decoration: none;
+  font-family: 'Montserrat', arial, sans-serif;
+  text-transform: uppercase;
+}
 .loginbtn, .signupbtn{
     display: inline-block;
     border: 1px solid black;
@@ -267,13 +309,16 @@ input, textarea {
   margin-right: 5px;
   color: #75affc;
 }
-.username{
+.username, .usernamemb{
   text-transform: capitalize;
   font-size: 1.5em;
   width: 60%;
   line-height: 60px;
   color: black;
   font-weight: 700;
+}
+.usernamemb{
+
 }
 .avatar{
   width: 40px;
@@ -297,18 +342,29 @@ input, textarea {
   margin-left: 30px;
 }
 .delete-comment{
-  right: 5px;
   padding:0px 4px;
   height: 18px;
+  margin-top: 7px;
+}
+.delete-video{
+  overflow: hidden;
+  padding:0px 4px;
+  height: 18px;
+  margin-top: 11px;
 }
 #slides{
   width: 100%;
+}
+.redirect{
+  color: #75affc;
 }
 .loginbtn:hover, .signupbtn:hover, .profile-login:hover{
   background-color: #ffa31a;
   cursor: pointer;
 }
 .choose-file{
+  border: rgba(117, 175, 252, 0.46) solid 3px;
+  padding: 0;
   width:220px;
 }
 .submit-file{
@@ -417,8 +473,7 @@ div.profile-stats li span {
   width: 100%;
   max-width: 1000px;
 }
-.delete-account{
-}
+
 footer {
   background:#292c2f;
   font: bold 16px arial;
@@ -510,9 +565,21 @@ footer .wrapper .right form input[type='submit'] {
   .third-container{
     width: 100%;
   }
+  .signup-boxmb{
+    display: block;
+  }
+  .profile-boxmb{
+    display: block;
+  }
+  .username-wrapper{
+    justify-content:center;
+  }
 }
 
 @media all and (max-width : 1000px) {
+  nav{
+    padding: 10px 20px;
+  }
   .wrapper  {
     min-width:100px !important;
     width:100%;
@@ -548,7 +615,6 @@ footer .wrapper .right form input[type='submit'] {
     display:none;
   }
 }
-
 .pop {
 	z-index:10;
 }
@@ -558,5 +624,46 @@ footer .wrapper .right form input[type='submit'] {
   nav {height:auto;}
   nav .wrapper .left ul {
     margin:10px 0px 0px;
+  }
+  nav .wrapper .left ul li, nav .wrapper .right ul li {
+    padding: 3px 1px;
+    font-size:13px;
+  }
+  div.profile-stats{
+    padding:0px 0px 0px 90px;
+  }
+  div.profile-stats ul li {
+    margin-left: 12px;
+    font-size: 12px;
+    margin-right: 0px;
+  }
+  .profile-header>h1 {
+    margin-left: -240px;
+    margin-top: 5px;
+    top: 15px;
+    font-size: 40px;
+    left: 350px;
+    position: absolute;
+  }
+  .profile-header{
+    margin-top: 5px;
+  }
+  .editbtn{
+    margin:5px 10px 0 0;
+  }
+  figure.profile-picture{
+    width: 100px;
+    top: -17px;
+    height: 100px;
+    left: -40px;
+    border: none;
+  }
+  .login-container, .signup-container{
+    width: 100%;
+    padding: 0;
+  }
+  #login, #signup{
+    padding:20px 0px 20px;
+    width: 100%;
   }
 }
