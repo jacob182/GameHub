@@ -18,16 +18,20 @@
 
 		//if there is one matching record
 		if($count == 1)
-		{
-			//start the user session to allow authorised access to secured web pages
-			$_SESSION['user'] = $username;
-			//redirect to products.php
-			header('location:../view/feed.php');
-		}
-		else
-		{
-			//if login not successful, create an error message to display on the login page
-			$_SESSION['error'] = 'Incorrect username or password. Please try again.';
-			header('location:../view/login.php');
-		}
+        {
+            //start the user session to allow authorised access to secured web pages
+            $_SESSION['user'] = $username;
+            //redirect to products.php
+            header('location:../view/feed.php');
+        }
+        else if ($count == 2) {
+            $_SESSION['error'] = 'Your account is banned';
+            header('location:../view/login.php');
+        }
+        else
+        {
+            //if login not successful, create an error message to display on the login page
+            $_SESSION['error'] = 'Incorrect username or password. Please try again.';
+            header('location:../view/login.php');
+        }
 ?>

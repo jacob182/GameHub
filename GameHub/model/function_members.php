@@ -17,7 +17,7 @@
 	{
 		//establishing the connection to the database
 		global $conn;
-		$sql = "INSERT INTO members (email, username, password) VALUES (:email, :username, :password)";
+		$sql = "INSERT INTO members (email, username, password, admin) VALUES (:email, :username, :password, '1')";
 		//use a prepared statement to enhance security
 		$statement = $conn->prepare($sql);
 		//values binded to the parameters
@@ -33,32 +33,51 @@
 	}
 
 	function login($username, $password)
-	{
-	  global $conn;
-	   $sql = 'SELECT `password` FROM members WHERE username = :username';
-	  $statement = $conn->prepare($sql);
-	  $statement->bindValue(':username', $username);
-	  $statement->execute();
-	  $result = $statement->fetchAll();
-	  $statement->closeCursor();
-		$count = $statement->rowCount();
-		if($count != 0) {
-			if(password_verify($password, $result[0]['password'])) {
-				return 1;
-			} else {
-				return 0;
-			}
-		}
+    {
+      global $conn;
+       $sql = 'SELECT password, admin FROM members WHERE username = :username';
+      $statement = $conn->prepare($sql);
+      $statement->bindValue(':username', $username);
+      $statement->execute();
+      $result = $statement->fetchAll();
+      $statement->closeCursor();
+        $count = $statement->rowCount();
+        if($count != 0) {
+            if($result[0]['admin'] == 0) {
+                return 2;
+            }
+            if(compareHash($result[0]['password'], $password)) {
+                return 1;
+            } else {
+                return 0;
+            }
+        }
 
-	  return $count;
-	}
-
+      return $count;
+    }
 	function isLogged()
 	{
 	  if(isset($_SESSION['user'])) {
 	    return true;
 	  }
 	  return false;
+	}
+
+	function admin()
+	{
+		global $conn;
+		$sql = "SELECT * FROM members WHERE username = :username AND  Admin = :admin";
+		$statement = $conn->prepare($sql);
+		$statement->bindValue(':username', $_SESSION['user']);
+		$statement->bindValue(':admin', '2');
+		$statement->execute();
+		$result = $statement->fetchAll();
+		$statement->closeCursor();
+
+		if(!empty($result)) {
+            return true;
+        }
+        return false;
 	}
 
 	function get_member($username)
@@ -72,7 +91,7 @@
 		$statement->closeCursor();
 		if(count($result) == 0) {
 			return false;
-		} 
+		}
 		return $result;
 	}
 
@@ -139,13 +158,13 @@
 	  return $count;
 
 	}
-	
+
 	function get_avatar($username = null) {
 		if($username === null) $username = $_SESSION['user'];
 		$user = get_member($username);
 		if(empty($user['ClientImage'])) {
 			return "../images/default.jpg";
-		} 
+		}
 		return $user['ClientImage'];
 	}
 
@@ -167,4 +186,42 @@
 		//result is returned to the database
 		return $result;
 	}
+
+	//custom hashing method supported by PHP 5.4
+    function passHash($str, $salt = "", $salt_pos = 0) {
+        if($salt == "")
+        { // Generate a new salt
+            $charlist  = array_merge(range("a", "z"), range(0, 9), range(0, 9));
+            $salt_pos  = strlen($str) << 32;
+            $salt_pos += strlen($str);
+            $salt_pos %= 0x7f;
+
+            for($i = 0; $i < 32; $i++) // Alphanumeric to blend with sha512
+                $salt .= $charlist[array_rand($charlist)];
+        }
+
+        // Merge password with salt in the form pass[char].salt[char%salt_len]
+        $merge = "";
+
+        for($u = 0; $u < strlen($str); $u++)
+            $merge .= $str[$u] . $salt[$u % strlen($salt)];
+
+        $hash = hash("sha512", $merge);
+
+        // Merge the hash with our salt (for later reading) and other data
+        $final = substr($hash, 0, $salt_pos);
+        $final .= $salt;
+        $final .= substr($hash, $salt_pos);
+
+        return $final;
+    }
+
+    function compareHash($hash, $str){
+        $salt_pos  = strlen($str) << 32;
+        $salt_pos += strlen($str);
+        $salt_pos %= 0x7f;
+
+        $test_hash = passHash($str, substr($hash, $salt_pos, 32), $salt_pos);
+        return $test_hash === $hash;
+    }
 		?>

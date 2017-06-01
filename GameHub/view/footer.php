@@ -1,10 +1,13 @@
 <footer>
   <div class="wrapper">
     <div class="left">
-      <a href="#" id='footerLogo'>
+      <a href="feed.php" id='footerLogo'>
         <img src="../images/logo.png" alt="Game Hub" width="150" height="40" />
       </a>
       <ul>
+        <?php if(isLogged() && admin()) {
+          print("<li><a href='admin.php'>Admin Page ·</a></li>");
+        } ?>
         <li><a href="feed.php">Home · </a></li>
         <li><a href="https://oce.op.gg/summoner/userName=link182">OP.GG · </a></li>
         <li><a href="about.php">Contact</a></li>

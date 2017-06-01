@@ -58,8 +58,7 @@ $count = count_username($username);
   		header("location:../view/signup.php");
   		exit();
   	}
-		//generate a random salt value using the MD5 encryption method and the PHP uniqid() and rand() functions
-				$password = password_hash($password, PASSWORD_DEFAULT);
+				$password = passHash($password);
 
     //call the add_user() function
     	$result = add_member($email, $username, $password);

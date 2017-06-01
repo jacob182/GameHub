@@ -62,9 +62,9 @@ function register(){
 	var emailConf = document.getElementById('confirm-email');
 	var pass = document.getElementById('password');
 	var passwordConf = document.getElementById('confirm-password');
-  var emailpatt = new regex ('/^(([^<>()[]\.,;:s@"]+(.[^<>()[]\.,;:s@"]+)*)|(".+"))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/');
-  var passpatt = new regex('.{7,}');
-  var userpatt = new regex('^(?=(?![0-9])?[A-Za-z0-9]?[._-]?[A-Za-z0-9]+).{3,20}');
+  var emailpatt = new RegExp('/^(([^<>()[]\.,;:s@"]+(.[^<>()[]\.,;:s@"]+)*)|(".+"))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/');
+  var passpatt = new RegExp('.{7,}');
+  var userpatt = new RegExp('^(?=(?![0-9])?[A-Za-z0-9]?[._-]?[A-Za-z0-9]+).{3,20}');
 
 	if(username.value == '' || email.value == '' || emailConf.value == '' || pass.value == '' || passwordConf.value == '') {
 		errorAnchor.innerHTML = 'All fields are required!';
