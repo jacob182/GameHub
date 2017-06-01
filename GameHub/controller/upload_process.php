@@ -25,7 +25,7 @@ if(isset($_POST['submit_file']))
 }
 
 if(isset($_POST['submit_file']))
-{header('location: /gamehub/view/profile.php');
+{header('location: ../view/profile.php');
 } else{
   echo"nope";
 }
