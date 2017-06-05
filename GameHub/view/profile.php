@@ -7,7 +7,7 @@
 
 	//retrieve the header
 	require('header.php');
-	if (!isLogged ()) header ('location: feed.php');
+	if (!isLogged ()) header ('location: login.php');
 	//check if user is logged in/set variables for user data
 	if(isset($_GET['username'])) {
 		$username = $_GET['username'];

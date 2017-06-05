@@ -34,8 +34,20 @@ nav .wrapper .left {
   display: flex;
   justify-content: space-between;
 }
+.adminwrapper{
+  width: 60%;
+  max-width: 400px;
+  min-width: 300px;
+  margin: 0 auto;
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+}
 .njc{
   justify-content: flex-start;
+}
+.auto{
+  margin: 0 auto;
 }
 nav .wrapper, footer .wrapper {
   display:flex;
@@ -163,6 +175,8 @@ text-align: center;
   text-align: center;
   padding-bottom: 5px;
 }
+.editrank{
+}
 .feed{
   width: 75%;
 }
@@ -205,6 +219,8 @@ text-align: center;
   padding: 10px 5px;
   display: flex;
   background-color: #eee;
+  margin-bottom: 5px;
+  justify-content: space-between;
   border: 1px solid black;
 }
 .follow-avatar{
@@ -526,6 +542,9 @@ footer .wrapper .left ul li a {
 	margin-right: 3px;
 	margin-bottom: 5px;
 }
+.pop {
+	z-index:10;
+}
 footer .wrapper .right h3 {
   margin: 10px 42px 35px 0;
 	color: #ffffff;
@@ -580,7 +599,7 @@ footer .wrapper .right form input[type='submit'] {
   nav{
     padding: 10px 20px;
   }
-  .wrapper  {
+  .wrapper, .adminwrapper  {
     min-width:100px !important;
     width:100%;
     overflow:hidden;
@@ -614,10 +633,11 @@ footer .wrapper .right form input[type='submit'] {
   .profile{
     display:none;
   }
+  .follow-display{
+    width: 100%;
+  }
 }
-.pop {
-	z-index:10;
-}
+
 
 @media all and (max-width:600px) {
   #logo {float:none;}

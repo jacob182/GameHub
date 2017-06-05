@@ -56,15 +56,36 @@ $.fn.slideFadeToggle = function(easing, callback) {
   return this.animate({ opacity: 'toggle', height: 'toggle' }, 'fast', easing, callback);
 };
 
+window.onload = function() {
+	if(localStorage.getItem('username') !== null) {
+		document.getElementById('username').value = localStorage.getItem('username');
+		document.getElementById('email').value = localStorage.getItem('email');
+		document.getElementById('confirm-email').value = localStorage.getItem('emailConf');
+		document.getElementById('password').value = localStorage.getItem('pass');
+		document.getElementById('confirm-password').value = localStorage.getItem('passwordConf');
+	}
+};
+
 function register(){
+
 	var username = document.getElementById('username');
 	var email = document.getElementById('email');
 	var emailConf = document.getElementById('confirm-email');
 	var pass = document.getElementById('password');
 	var passwordConf = document.getElementById('confirm-password');
-  var emailpatt = new RegExp('/^(([^<>()[]\.,;:s@"]+(.[^<>()[]\.,;:s@"]+)*)|(".+"))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/');
-  var passpatt = new RegExp('.{7,}');
-  var userpatt = new RegExp('^(?=(?![0-9])?[A-Za-z0-9]?[._-]?[A-Za-z0-9]+).{3,20}');
+	var emailpatt = new RegExp('/^(([^<>()[]\.,;:s@"]+(.[^<>()[]\.,;:s@"]+)*)|(".+"))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/');
+	var passpatt = new RegExp('.{7,}');
+	var userpatt = new RegExp('^(?=(?![0-9])?[A-Za-z0-9]?[._-]?[A-Za-z0-9]+).{3,20}');
+
+	if(typeof(Storage) !== 'undefined') {
+		localStorage.setItem('username', username.value);
+		localStorage.setItem('email', email.value);
+		localStorage.setItem('emailConf', emailConf.value);
+		localStorage.setItem('pass', pass.value);
+		localStorage.setItem('passwordConf', passwordConf.value);
+	} else {
+		console.log('Web storage not supported!');
+	}
 
 	if(username.value == '' || email.value == '' || emailConf.value == '' || pass.value == '' || passwordConf.value == '') {
 		errorAnchor.innerHTML = 'All fields are required!';
@@ -88,19 +109,19 @@ function register(){
 		  }
 		});
 
-    if (email.value == emailpatt.test(email.value)){
-    errorAnchor.innerHTML = 'Please enter a valid email address.';
-    return false;
+    if (!emailpatt.test(email.value)){
+		errorAnchor.innerHTML = 'Please enter a valid email address.';
+		return false;
     }
-    if (username.value == userpatt.test(username.value))
+    if (!userpatt.test(username.value))
     {
-    errorAnchor.innerHTML = 'Please enter a valid username (min 2 - max 12 characters).';
-    return false;
+		errorAnchor.innerHTML = 'Please enter a valid username (min 2 - max 12 characters).';
+		return false;
     }
-    if (pass.value == passpatt.test(pass.value))
+    if (!passpatt.test(pass.value))
     {
-    errorAnchor.innerHTML = 'Please enter a valid password (atleast 7 characters).';
-    return false;
+		errorAnchor.innerHTML = 'Please enter a valid password (atleast 7 characters).';
+		return false;
     }
     if (pass.value != passwordConf.value)
     {

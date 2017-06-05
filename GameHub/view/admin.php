@@ -9,9 +9,9 @@
 	require('header.php');
 ?>
 
-<div class="wrapper block">
+<div class="adminwrapper block">
 <?php
-	if(!isLogged() || !admin()) die('You must be an administrator to view this page!');
+	if(!isLogged() || !admin()) header ('location:feed.php');
 
 	global $conn;
 	if(isset($_GET['username'])) {
@@ -25,9 +25,9 @@
 			print("You have successfully updated this user's rank!");
 		}
 
-		print("Edit {$user['Username']}'s Rank<br />");
+		print("<h3>Edit {$user['Username']}'s Rank</h3>");
 		print("
-		<form method='POST'>
+		<form class=method='POST'>
 			<select name='rank'>
 				<option value='0'>Banned</option>
 				<option value='1'>User</option>
@@ -42,9 +42,9 @@
 
 	$users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 	foreach($users as $user) {
-		print("<div class='follow-display'>
-						User: {$user['Username']} Rank: {$user['Admin']}<br />");
-		print("<a href='admin.php?username={$user['Username']}'>Edit rank</a><br/>
+		print("<div class='follow-display auto	'>
+						<p class='bold'>User:	</p> <p>{$user['Username']}</p> <p class='bold'>Rank:</p> <p>{$user['Admin']}</p><br/>");
+		print("<a class='editrank' href='admin.php?username={$user['Username']}'>Edit rank</a><br/>
 						</div>");
 	}
 ?>

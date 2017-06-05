@@ -14,7 +14,7 @@ if(isset($_POST['submit_file']))
   $ext = '.' . pathinfo($nameOrig,PATHINFO_EXTENSION);
   if($ext != '.mp4' && $ext != '.avi') {
     $_SESSION['error'] = 'File is not compatibale. Please try again.';
-    die(header('location: ../view/profile.php'));
+    die(header('location: /gamehub/view/profile.php'));
   }
 
   $name = base64_encode(mt_rand(0,1000) . mt_rand(0, 1000)) . $ext;
@@ -25,8 +25,9 @@ if(isset($_POST['submit_file']))
 }
 
 if(isset($_POST['submit_file']))
-{header('location: ../view/profile.php');
+{header('location: /gamehub/view/profile.php');
 } else{
-  echo"nope";
+  $_SESSION['error'] = 'File is not compatibale. Please try again.';
+  (header('location: /gamehub/view/profile.php'));
 }
  ?>
