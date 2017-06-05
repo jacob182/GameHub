@@ -5,7 +5,7 @@ GameHub Site for Web Development, a final project in itself that will prove comp
 
 # Admin
 Admin page can be found through the link in the footer!
-USERNAME AND PASSWORD FOR ADMIN ACCESS:
+# Details for admin access:
 Username: Link182
 Password: password
 
