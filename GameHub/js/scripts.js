@@ -25,7 +25,7 @@ var myIndex = 0;
       x[myIndex-1].style.display = "block";
       setTimeout(carousel, 3000);
   }
-}
+};
 
 function edit_password() {
   var toggler = document.getElementById('edit-password');
