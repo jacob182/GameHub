@@ -2,7 +2,7 @@
 	//database connection details
 	$host = 'localhost';
 	$user = 'root';
-	$password = '';
+	$password = 'waffle1';
 	$database = 'gamehub';
 
 	//connect to database with a try/catch statement
