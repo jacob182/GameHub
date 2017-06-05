@@ -55,9 +55,26 @@
  			<p>Basically challenger so if you think otherwise... <strong>B A N N E D.</strong> No questions asked.</p>
  	 	</div>
 	 </div>
-
-
 </div>
+<div class="wrapper block">
+	<div class="device-xs visible-xs"></div>
+		 <div class="device-sm visible-sm"></div>
+		 <div class="device-md visible-md"></div>
+		 <div class="device-lg visible-lg"></div>
+		 <div class="device-xl visible-xl"></div>
+		 <div class="container-fluid">
+				 <h1>Responsive grid demo</h1>
+
+				 <div>
+						 <span>Number of Columns:</span> <span id="grid-size"></span>
+				 </div>
+
+				 <br/>
+
+				 <div class="grid-stack">
+				 </div>
+	 </div>
+ </div>
   <?php
     //retrieve the footer
     require('footer.php');
