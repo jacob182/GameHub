@@ -2,13 +2,11 @@ $(document).ready(function(){
     $("#aboutToggle").click(function(){
         $("#about").slideToggle("slow");
     });
-});
-
-$(document).ready(function(){
-    $("#meToggle").click(function(){
+	 $("#meToggle").click(function(){
         $("#aboutme").slideToggle("slow");
     });
 });
+
 
 $(function () {
     var options = {
@@ -71,9 +69,9 @@ function register(){
 	var emailConf = document.getElementById('confirm-email');
 	var pass = document.getElementById('password');
 	var passwordConf = document.getElementById('confirm-password');
-	var emailpatt = new RegExp('/^(([^<>()[]\.,;:s@"]+(.[^<>()[]\.,;:s@"]+)*)|(".+"))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/');
+	var emailpatt = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	var passpatt = new RegExp('.{7,}');
-	var userpatt = new RegExp('^(?=(?![0-9])?[A-Za-z0-9]?[._-]?[A-Za-z0-9]+).{3,20}');
+	var userpatt = new RegExp('^(?=(?![0-9])?[A-Za-z0-9]?[._-]?[A-Za-z0-9]+).{2,12}');
 
 	if(typeof(Storage) !== 'undefined') {
 		localStorage.setItem('username', username.value);
@@ -98,41 +96,39 @@ function register(){
 		  }
 		});
 
-    $.ajax({
-		  url: "handler.php?action=emailTest&email=" + email.value
-		}).done(function(data) {
-		  if(data == 1) {
-			  errorAnchor.innerHTML = 'That email is already in use!';
-				return false;
-		  }
-		});
+		$.ajax({
+			  url: "handler.php?action=emailTest&email=" + email.value
+			}).done(function(data) {
+			  if(data == 1) {
+				  errorAnchor.innerHTML = 'That email is already in use!';
+					return false;
+			  }
+			});
 
-    if (!emailpatt.test(email.value)){
-		errorAnchor.innerHTML = 'Please enter a valid email address.';
-		return false;
-    }
-    if (!userpatt.test(username.value))
-    {
-		errorAnchor.innerHTML = 'Please enter a valid username (min 2 - max 12 characters).';
-		return false;
-    }
-    if (!passpatt.test(pass.value))
-    {
-		errorAnchor.innerHTML = 'Please enter a valid password (atleast 7 characters).';
-		return false;
-    }
-    if (pass.value != passwordConf.value)
-    {
-      errorAnchor.innerHTML = 'Please enter the same password.';
-      return false;
-    }
-    if (email.value != emailConf.value)
-    {
-      errorAnchor.innerHTML = 'Please enter the same email address.';
-      return false;
-    }
-		//if no errors
-		return true;
+		if (!emailpatt.test(email.value)){
+			errorAnchor.innerHTML = 'Please enter a valid email address.';
+			return false;
+		}
+		if (!userpatt.test(username.value))
+		{
+			errorAnchor.innerHTML = 'Please enter a valid username (min 2 - max 12 characters).';
+			return false;
+		}
+		if (!passpatt.test(pass.value))
+		{
+			errorAnchor.innerHTML = 'Please enter a valid password (atleast 7 characters).';
+			return false;
+		}
+		if (pass.value != passwordConf.value)
+		{
+		  errorAnchor.innerHTML = 'Please enter the same password.';
+		  return false;
+		}
+		if (email.value != emailConf.value)
+		{
+		  errorAnchor.innerHTML = 'Please enter the same email address.';
+		  return false;
+		}
 	}
-	return false;
+	return true;
 }

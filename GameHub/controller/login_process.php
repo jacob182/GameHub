@@ -16,7 +16,7 @@
 	//call the login() function
 		$count = login($username, $password);
 
-		if (empty($email) || empty($username) || empty($password))
+		if (empty($username) || empty($password))
 		{
 			$_SESSION['error'] = 'Incorrect username or password. Please try again.';
 			header("location:/view/login.php");

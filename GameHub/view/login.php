@@ -18,7 +18,7 @@
 					print($_SESSION['error']);
 					$_SESSION['error'] = '';
 				} else if(isset($_SESSION['success']) && !empty($_SESSION['success'])) {
-					print($_SESSION['sccess']);
+					print($_SESSION['success']);
 					$_SESSION['success'] = '';
 				}
 			?>
