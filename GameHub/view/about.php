@@ -57,6 +57,7 @@
 	 </div>
 </div>
 
+<div class="wrapper block">
 	<div class="grid-stack">
 	  <div class="grid-stack-item" id="move" data-gs-x="0" data-gs-y="0" data-gs-width="8" data-gs-height="1">
 	    <div class="grid-stack-item-content">
@@ -74,7 +75,7 @@
 	    </div>
 	  </div>
   </div>
-
+</div>
 
  </div>
   <?php
