@@ -10,6 +10,14 @@ $(document).ready(function(){
     });
 });
 
+$(function () {
+    var options = {
+        cell_height: 80,
+        vertical_margin: 10
+    };
+    $('.grid-stack').gridstack(options);
+});
+
 function deselect1(e) {
   $('.fspop').slideFadeToggle(function() {
     e.removeClass('selected');
