@@ -12,7 +12,7 @@ if(isset($_POST['submit_file']))
   $temp = $_FILES['file']['tmp_name'];
   $nameOrig = $_FILES['file']['name'];
   $ext = '.' . pathinfo($nameOrig,PATHINFO_EXTENSION);
-  if($ext != '.mp4' && $ext != '.avi') {
+  if($ext != '.mp4' && $ext != '.avi' && $ext != '.wmv') {
     $_SESSION['error'] = 'File is not compatibale. Please try again.';
     die(header('location: /gamehub/view/profile.php'));
   }

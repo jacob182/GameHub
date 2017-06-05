@@ -46,6 +46,17 @@
       </form>
     </div>
   </div>
+<?php
+
+  $user_type = isset($_SESSION['user']) ? "Authen" : "Anon";
+  $load_end = microtime();
+  $loadTime = $load_end - $load_start;
+  echo '<div style="color:white;">';
+    echo "USER TYPE: {$user_type}<br />";
+    echo "PAGE INITIATED IN : {$loadTime}";
+  echo '</div>';
+
+?>
 </footer>
 </body>
 </html>

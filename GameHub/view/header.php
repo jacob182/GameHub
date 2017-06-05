@@ -4,6 +4,8 @@
 	//Display errors for development environment
 	ini_set('display_errors',1);
 	error_reporting(E_ALL);
+
+  $load_start = microtime();
 	echo $title ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
