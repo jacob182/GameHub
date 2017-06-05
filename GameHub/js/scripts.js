@@ -1,4 +1,11 @@
 window.onload = function() {
+  if(localStorage.getItem('username') !== null) {
+		document.getElementById('username').value = localStorage.getItem('username');
+		document.getElementById('email').value = localStorage.getItem('email');
+		document.getElementById('confirm-email').value = localStorage.getItem('emailConf');
+		document.getElementById('password').value = localStorage.getItem('pass');
+		document.getElementById('confirm-password').value = localStorage.getItem('passwordConf');
+	}
 var myIndex = 0;
   if (window.location.href.indexOf('about') > -1) {
     carousel();

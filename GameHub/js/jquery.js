@@ -56,16 +56,6 @@ $.fn.slideFadeToggle = function(easing, callback) {
   return this.animate({ opacity: 'toggle', height: 'toggle' }, 'fast', easing, callback);
 };
 
-window.onload = function() {
-	if(localStorage.getItem('username') !== null) {
-		document.getElementById('username').value = localStorage.getItem('username');
-		document.getElementById('email').value = localStorage.getItem('email');
-		document.getElementById('confirm-email').value = localStorage.getItem('emailConf');
-		document.getElementById('password').value = localStorage.getItem('pass');
-		document.getElementById('confirm-password').value = localStorage.getItem('passwordConf');
-	}
-};
-
 function register(){
 
 	var username = document.getElementById('username');
