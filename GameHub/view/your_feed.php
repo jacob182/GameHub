@@ -139,8 +139,8 @@
                             <video src="../' . $item['Vid_url'] . '" width="100%" controls></video>
                          </div>
                         <div class="feed-description">
-                          <a class="author-avatar" href="../view/profile.php?username=' . $item['Username'] . '"><img class="avatar" src="' . get_avatar($item['Username']) . '" alt="Author Image"></a>
-                          <p class="mt9"><a class="author-name" href="../view/profile.php?username=' . $item['Username'] . '">' . $item['Username'] . '</a>' . $item['Vid_description'] . '</p>';
+                          <a class="author-avatar" href="profile.php?username=' . $item['Username'] . '"><img class="avatar" src="' . get_avatar($item['Username']) . '" alt="Author Image"></a>
+                          <p class="mt9"><a class="author-name" href="profile.php?username=' . $item['Username'] . '">' . $item['Username'] . '</a>' . $item['Vid_description'] . '</p>';
                             if(isLogged()){
                               if($item['Username'] == $_SESSION['user']) {
                                 ?>
@@ -166,8 +166,8 @@
           foreach ($result as $item) {
           echo '<div class="comment-list">
             <div class="comment-entry">
-              <a class="author-avatar" href=""><img class="avatar comment-avatar" src="' . get_avatar($item['Username']) . '" alt="Author Image"></a>
-              <p class="mt4"><a class="author-name" href="">' . $item['Username'] . '</a>' . $item['Comment_txt'] . '</p>
+              <a class="author-avatar" href="profile.php?username=' . $item['Username'] . '"><img class="avatar comment-avatar" src="' . get_avatar($item['Username']) . '" alt="Author Image"></a>
+              <p class="mt4"><a class="author-name" href="profile.php?username=' . $item['Username'] . '">' . $item['Username'] . '</a>' . $item['Comment_txt'] . '</p>
               ';
               if(isLogged()){
                 if($item['Username'] == $_SESSION['user']) {

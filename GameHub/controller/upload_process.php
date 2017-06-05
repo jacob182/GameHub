@@ -14,7 +14,7 @@ if(isset($_POST['submit_file']))
   $ext = '.' . pathinfo($nameOrig,PATHINFO_EXTENSION);
   if($ext != '.mp4' && $ext != '.avi' && $ext != '.wmv') {
     $_SESSION['error'] = 'File is not compatibale. Please try again.';
-    die(header('location: /view/profile.php'));
+    die(header('location: ../view/profile.php'));
   }
 
   $name = base64_encode(mt_rand(0,1000) . mt_rand(0, 1000)) . $ext;
@@ -25,9 +25,9 @@ if(isset($_POST['submit_file']))
 }
 
 if(isset($_POST['submit_file']))
-{header('location: /view/profile.php');
+{header('location: ../view/profile.php');
 } else{
   $_SESSION['error'] = 'File is not compatibale. Please try again.';
-  (header('location: /view/profile.php'));
+  (header('location: ../view/profile.php'));
 }
  ?>
