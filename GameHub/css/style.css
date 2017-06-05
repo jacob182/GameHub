@@ -146,6 +146,9 @@ nav .wrapper .left ul li a:hover, nav .wrapper .right ul li a:hover {
 .grid-stack {
   background: #75affc;
 }
+header{
+  font-weight: bold;  
+}
 .grid-stack-item-content {
   color: black;
   text-align: center;
