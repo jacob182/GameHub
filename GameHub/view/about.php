@@ -57,25 +57,24 @@
 	 </div>
 </div>
 
-<div class="wrapper block">
 	<div class="grid-stack">
-	  <div class="grid-stack-item" id="title" data-gs-x="0" data-gs-y="0" data-gs-width="8" data-gs-height="1">
+	  <div class="grid-stack-item" id="move" data-gs-x="0" data-gs-y="0" data-gs-width="8" data-gs-height="1">
 	    <div class="grid-stack-item-content">
 	      <header>Move</header>
 	    </div>
 	  </div>
-	  <div class="grid-stack-item" id="slug" data-gs-x="8" data-gs-y="1" data-gs-width="4" data-gs-height="1">
+	  <div class="grid-stack-item" id="the" data-gs-x="8" data-gs-y="1" data-gs-width="4" data-gs-height="1">
 	    <div class="grid-stack-item-content">
 	      <header>The</header>
 	    </div>
 	  </div>
-	  <div class="grid-stack-item" id="content" data-gs-x="0" data-gs-y="2" data-gs-width="12" data-gs-height="1">
+	  <div class="grid-stack-item" id="tiles" data-gs-x="0" data-gs-y="2" data-gs-width="12" data-gs-height="1">
 	    <div class="grid-stack-item-content">
 	      <header>Tiles</header>
 	    </div>
 	  </div>
   </div>
-</div>
+
 
  </div>
   <?php

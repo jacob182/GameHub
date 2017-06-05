@@ -12,7 +12,7 @@ $(function() {
   $('.grid-stack').gridstack({
     animate: true
   });
-
+  
   var grid = $('.grid-stack').data('gridstack'),
       serialize = function() {
         return _.map($('.grid-stack > .grid-stack-item:visible'), function(el) {
@@ -47,11 +47,9 @@ $(function() {
 
   setTimeout(function() {
     var saved = [
-      { "id": "title", "x": 0, "y": 0, "width": 8, "height": 1 },
-      { "id": "slug", "x": 8, "y": 0, "width": 4, "height": 1 },
-      { "id": "content", "x": 0, "y": 1, "width": 8, "height": 1 },
-      { "id": "time", "x": 0, "y": 2, "width": 12, "height": 1 },
-      { "id": "date", "x": 8, "y": 1, "width": 4, "height": 1 }
+      { "id": "move", "x": 0, "y": 0, "width": 8, "height": 1 },
+      { "id": "the", "x": 8, "y": 0, "width": 4, "height": 1 },
+      { "id": "tiles", "x": 0, "y": 1, "width": 8, "height": 1 },
     ];
     move(grid, saved);
   }, 2000);
