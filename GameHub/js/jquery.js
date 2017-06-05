@@ -8,68 +8,55 @@ $(document).ready(function(){
 });
 
 
-$(function () {
-           var waitForFinalEvent=function(){var b={};return function(c,d,a){a||(a="I am a banana!");b[a]&&clearTimeout(b[a]);b[a]=setTimeout(c,d)}}();
-           var fullDateString = new Date();
-           function isBreakpoint(alias) {
-               return $('.device-' + alias).is(':visible');
-           }
+$(function() {
+  $('.grid-stack').gridstack({
+    animate: true
+  });
+
+  var grid = $('.grid-stack').data('gridstack'),
+      serialize = function() {
+        return _.map($('.grid-stack > .grid-stack-item:visible'), function(el) {
+          var node = $(el).data('_gridstack_node');
+          return {id: $(el).attr('id'), x: node.x, y: node.y, width: node.width, height: node.height};
+        });
+      },
+      move = function(grid, stored) {
+        stored = GridStackUI.Utils.sort(stored, 1, 12);
+        $.each(stored, function(key, node) {
+          el = $('#' + node.id);
+          $('.log').append($('<p></p>').text('Moving #' + node.id + ' to ' + 'x:' + node.x + ' y:' + node.y));
+
+          /* grid.addWidget($('<div><div class="grid-stack-item-content" /><div/>'),
+                        node.x, node.y, node.width, node.height); */
+          /* grid.move(el, node.x, node.y);
+          grid.resize(el, node.width, node.height); */
+          grid.update(el, node.x, node.y, node.width, node.height);
+        });
+      };
 
 
-           var options = {
-               float: false
-           };
-           $('.grid-stack').gridstack(options);
-           function resizeGrid() {
-               var grid = $('.grid-stack').data('gridstack');
-               if (isBreakpoint('xs')) {
-                   $('#grid-size').text('One column mode');
-               } else if (isBreakpoint('sm')) {
-                   grid.setGridWidth(3);
-                   $('#grid-size').text(3);
-               } else if (isBreakpoint('md')) {
-                   grid.setGridWidth(6);
-                   $('#grid-size').text(6);
-               } else if (isBreakpoint('lg')) {
-                   grid.setGridWidth(12);
-                   $('#grid-size').text(12);
-               }
-           };
-           $(window).resize(function () {
-               waitForFinalEvent(function() {
-                   resizeGrid();
-               }, 300, fullDateString.getTime());
-           });
 
-           new function () {
-               this.serializedData = [
-                   {x: 0, y: 0, width: 4, height: 2},
-                   {x: 3, y: 1, width: 4, height: 2},
-                   {x: 4, y: 1, width: 4, height: 1},
-                   {x: 2, y: 3, width: 8, height: 1},
-                   {x: 0, y: 4, width: 4, height: 1},
-                   {x: 0, y: 3, width: 4, height: 1},
-                   {x: 2, y: 4, width: 4, height: 1},
-                   {x: 2, y: 5, width: 4, height: 1},
-                   {x: 0, y: 6, width: 12, height: 1}
-               ];
 
-               this.grid = $('.grid-stack').data('gridstack');
 
-               this.loadGrid = function () {
-                   this.grid.removeAll();
-                   var items = GridStackUI.Utils.sort(this.serializedData);
-                   _.each(items, function (node, i) {
-                       this.grid.addWidget($('<div><div class="grid-stack-item-content">' + i + '</div></div>'),
-                           node.x, node.y, node.width, node.height);
-                   }, this);
-                   return false;
-               }.bind(this);
+  $('.serialize').on('click', function(e) {
+    e.preventDefault;
+    var data = serialize();
+    //alert(data);
+    $('.log').html(JSON.stringify(data, null, '    '));
+  });
 
-               this.loadGrid();
-               resizeGrid();
-           };
-       });
+  setTimeout(function() {
+    var saved = [
+      { "id": "title", "x": 0, "y": 0, "width": 8, "height": 1 },
+      { "id": "slug", "x": 8, "y": 0, "width": 4, "height": 1 },
+      { "id": "content", "x": 0, "y": 1, "width": 8, "height": 1 },
+      { "id": "time", "x": 0, "y": 2, "width": 12, "height": 1 },
+      { "id": "date", "x": 8, "y": 1, "width": 4, "height": 1 }
+    ];
+    move(grid, saved);
+  }, 2000);
+
+});
 function deselect1(e) {
   $('.fspop').slideFadeToggle(function() {
     e.removeClass('selected');

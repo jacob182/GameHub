@@ -144,12 +144,12 @@ nav .wrapper .left ul li a:hover, nav .wrapper .right ul li a:hover {
   padding: 20px 20px 5px 20px;
 }
 .grid-stack {
-  background: lightgoldenrodyellow;
+  background: #75affc;
 }
 .grid-stack-item-content {
-  color: #2c3e50;
+  color: black;
   text-align: center;
-  background-color: #18bc9c;
+  background-color: #ccc;
 }
 /* end of JQUERY CSS */
 
