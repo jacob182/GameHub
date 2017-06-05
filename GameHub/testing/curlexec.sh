@@ -1,5 +1,5 @@
 # Test website infastructure
-curl http://localhost/gamehub/index.php
+curl http://localhost//index.php
 echo ''
 
 # Test page system
