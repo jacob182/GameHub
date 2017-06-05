@@ -10,12 +10,9 @@
 ?>
 <div class="wrapper block">
   <div id="slides">
-    <img class="imageSlides" src="..\images\CSGO_slide.png"
-    style="width:100%">
-    <img class="imageSlides" src="..\images\League_slide.png"
-    style="width:100%">
-    <img class="imageSlides" src="..\images\overwatch_slide.jpg"
-    style="width:100%">
+    <img class="imageSlides" src="..\images\CSGO_slide.png" style="width:100%">
+    <img class="imageSlides" src="..\images\League_slide.png" style="width:100%">
+    <img class="imageSlides" src="..\images\overwatch_slide.jpg" style="width:100%">
   </div>
 </div>
 <div class="about-content">
@@ -58,26 +55,6 @@
  			<p>Basically challenger so if you think otherwise... <strong>B A N N E D.</strong> No questions asked.</p>
  	 	</div>
 	 </div>
-	 <div class="gridster">
-    <ul>
-        <li data-row="1" data-col="1" data-sizex="1" data-sizey="1"></li>
-        <li data-row="2" data-col="1" data-sizex="1" data-sizey="1"></li>
-        <li data-row="3" data-col="1" data-sizex="1" data-sizey="1"></li>
-
-        <li data-row="1" data-col="2" data-sizex="2" data-sizey="1"></li>
-        <li data-row="2" data-col="2" data-sizex="2" data-sizey="2"></li>
-
-        <li data-row="1" data-col="4" data-sizex="1" data-sizey="1"></li>
-        <li data-row="2" data-col="4" data-sizex="2" data-sizey="1"></li>
-        <li data-row="3" data-col="4" data-sizex="1" data-sizey="1"></li>
-
-        <li data-row="1" data-col="5" data-sizex="1" data-sizey="1"></li>
-        <li data-row="3" data-col="5" data-sizex="1" data-sizey="1"></li>
-
-        <li data-row="1" data-col="6" data-sizex="1" data-sizey="1"></li>
-        <li data-row="2" data-col="6" data-sizex="1" data-sizey="2"></li>
-    </ul>
-</div>
 </div>
   <?php
     //retrieve the footer

@@ -78,20 +78,20 @@
               <div>' . $vidCount . '</div>
             </div>
             <div>
-              <div><a class="follow bold" href="#">Followers</a></div></br>
+              <div><a class="follow bold" href="profile.php">Followers</a></div></br>
               <div>' . $user['followers'] . '</div>
               </div>
             <div>
-              <div><a class="follow bold" href="#">Followed</a></div></br>
+              <div><a class="follow bold" href="profile.php">Followed</a></div></br>
               <div>' . $user['following'] . '</div>
             </div>
                 </div>
             </div>');
         } else {
-            print("<div class='signup-box'>
-                            <h3> Welcome</br> Please login</h3>
-                            <button class='profile-login' onclick='window.location.href=`login.php`'>Login</button>
-                            </div>");
+        print("<div class='signup-box'>
+                <h3> Welcome</br> Please login</h3>
+                <button class='profile-login' onclick='window.location.href=`login.php`'>Login</button>
+              </div>");
         }
         ?>
 
