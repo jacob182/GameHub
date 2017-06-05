@@ -13,15 +13,16 @@
 
   <div id="login">
     <form action="../controller/login_process.php" method="post">
-	<?php
-			if(isset($_SESSION['error']) && !empty($_SESSION['error'])) {
-				print($_SESSION['error']);
-				$_SESSION['error'] = '';
-			} else if(isset($_SESSION['success']) && !empty($_SESSION['success'])) {
-				print($_SESSION['success']);
-				$_SESSION['success'] = '';
-			}
-		?>
+			<?php
+				if(isset($_SESSION['error']) && !empty($_SESSION['error'])) {
+					print($_SESSION['error']);
+					$_SESSION['error'] = '';
+				} else if(isset($_SESSION['success']) && !empty($_SESSION['success'])) {
+					print($_SESSION['sccess']);
+					$_SESSION['success'] = '';
+				}
+			?>
+			<div id="errorAnchor"></div>
       <div class="field-wrap">
         <label>Username*</label>
         <input type="text" name="username" id="username" placeholder="Enter your username*"/>

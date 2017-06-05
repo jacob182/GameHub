@@ -12,7 +12,15 @@ ini_set('display_errors',1);
 ?>
 <h1> Edit Profile </h1>
 <div class="wrapper">
-
+	<?php
+			if(isset($_SESSION['error']) && !empty($_SESSION['error'])) {
+				print($_SESSION['error']);
+				$_SESSION['error'] = '';
+			} else if(isset($_SESSION['success']) && !empty($_SESSION['success'])) {
+				print($_SESSION['success']);
+				$_SESSION['success'] = '';
+			}
+		?>
 	<form method="post" action="../controller/new_avatar_process.php" class="field-wrap-avatar" enctype="multipart/form-data">
 		<label class="edit-profile-heading">Change Avatar</label></br>
 		<span class="settings-avatar-box">

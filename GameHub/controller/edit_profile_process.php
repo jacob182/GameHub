@@ -22,7 +22,7 @@
 
   if (empty($email))
   {
-    $_SESSION['error'] = 'All * fields are required.';
+    $_SESSION['error'] = 'Please enter a valid email address.';
     header("location:../view/edit_profile.php");
     exit();
   }
