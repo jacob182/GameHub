@@ -8,7 +8,7 @@ if(typeof document.getElementById('username') != 'undefined') {
 		document.getElementById('confirm-password').value = localStorage.getItem('passwordConf');
 	}
 }
-  
+
 var myIndex = 0;
   if (window.location.href.indexOf('about') > -1) {
     carousel();
@@ -25,7 +25,7 @@ var myIndex = 0;
       x[myIndex-1].style.display = "block";
       setTimeout(carousel, 3000);
   }
-};
+}
 
 function edit_password() {
   var toggler = document.getElementById('edit-password');
