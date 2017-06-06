@@ -118,6 +118,7 @@ function check_password() {
     password.className = "input is-success";
     password_confirm.className = "input is-success";
     notification.innerHTML = "Passwords match";
+		notification.className = "help is-success";
     document.getElementById("regbtn").disabled = false;
   }
 }
