@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 06, 2017 at 07:27 AM
+-- Generation Time: Jun 06, 2017 at 11:17 AM
 -- Server version: 5.5.52-MariaDB
 -- PHP Version: 5.4.16
 
@@ -34,13 +34,6 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `Date_added` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `comments`
---
-
-INSERT INTO `comments` (`Comment_ID`, `Vid_ID`, `Username`, `Comment_txt`, `Date_added`) VALUES
-(5, 9, 'link182', 'bavba', 1496724941);
-
 -- --------------------------------------------------------
 
 --
@@ -48,9 +41,10 @@ INSERT INTO `comments` (`Comment_ID`, `Vid_ID`, `Username`, `Comment_txt`, `Date
 --
 
 CREATE TABLE IF NOT EXISTS `followers` (
-  `followerID` varchar(255) NOT NULL,
-  `followingID` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `follow_ID` int(11) NOT NULL,
+  `followingID` varchar(12) NOT NULL,
+  `followerID` varchar(12) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -75,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `members` (
 
 INSERT INTO `members` (`Username`, `Email`, `Password`, `ClientImage`, `Description`, `Admin`, `followers`, `following`) VALUES
 ('ianishungry', 'iankoala@gmail.com', 'a66fded995b220cb0b0ff053166fe101e8181ycd6r5uuuiokyn7zp8iypgv70c3lqf831afb4af6765ac1560db5597c4edfa2901f44c2f5eb01eaa82f862b4e3ac9e613f59fe1797c39eee88dac96f861c', '../images/profile_images/ianishungry.jpg', NULL, 0, 0, 0),
-('link182', 'jacobdcoorey@gmail.com', 'b540e075er67gxb0x25293e1v98nog2fsb02ji023eb2d8efdd1bc73d94f14d5a4331a2027e13f1bf037ec91fa00f565f7154a31da40871e56bd71fc064c588e59704a1dcf6a98ba0fa038e6261eaf83a', '../images/profile_images/link182.png', NULL, 2, 0, 0);
+('link182', 'jacobdcoorey@gmail.com', 'b540e075er67gxb0x25293e1v98nog2fsb02ji023eb2d8efdd1bc73d94f14d5a4331a2027e13f1bf037ec91fa00f565f7154a31da40871e56bd71fc064c588e59704a1dcf6a98ba0fa038e6261eaf83a', '../images/profile_images/link182.png', NULL, 2, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -127,9 +121,9 @@ ALTER TABLE `comments`
 -- Indexes for table `followers`
 --
 ALTER TABLE `followers`
-  ADD PRIMARY KEY (`followerID`,`followingID`),
-  ADD KEY `followerID` (`followerID`),
-  ADD KEY `following_delete` (`followingID`);
+  ADD PRIMARY KEY (`follow_ID`),
+  ADD KEY `following_ID` (`followingID`),
+  ADD KEY `follower_ID` (`followerID`);
 
 --
 -- Indexes for table `members`
@@ -161,6 +155,11 @@ ALTER TABLE `videos`
 ALTER TABLE `comments`
   MODIFY `Comment_ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
+-- AUTO_INCREMENT for table `followers`
+--
+ALTER TABLE `followers`
+  MODIFY `follow_ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT for table `sessions`
 --
 ALTER TABLE `sessions`
@@ -185,8 +184,8 @@ ALTER TABLE `comments`
 -- Constraints for table `followers`
 --
 ALTER TABLE `followers`
-  ADD CONSTRAINT `follower_delete` FOREIGN KEY (`followerID`) REFERENCES `members` (`Username`) ON DELETE CASCADE,
-  ADD CONSTRAINT `following_delete` FOREIGN KEY (`followingID`) REFERENCES `members` (`Username`) ON DELETE CASCADE;
+  ADD CONSTRAINT `followers_ibfk_1` FOREIGN KEY (`followingID`) REFERENCES `members` (`Username`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`followerID`) REFERENCES `members` (`Username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `sessions`
