@@ -101,21 +101,18 @@ nav .wrapper .left ul li a:hover, nav .wrapper .right ul li a:hover {
   background-color: #75affc;
   border: solid 1px black;
 }
-#about{
+#about , #aboutme , #aboutbrock , #aboutjordan , #aboutian{
   background-color:#eee ;
   display: none;
 }
-#meToggle {
+#meToggle , #brocktoggle , #jordantoggle , #iantoggle {
   margin-top: 30px;
   padding: 5px;
   text-align: center;
   background-color: #75affc;
   border: solid 1px black;
 }
-#aboutme{
-  background-color:#eee ;
-  display: none;
-}
+
 .about-box{
   text-align: center;
   font-weight: bold;
@@ -147,7 +144,7 @@ nav .wrapper .left ul li a:hover, nav .wrapper .right ul li a:hover {
   background: #75affc;
 }
 header{
-  font-weight: bold;  
+  font-weight: bold;
 }
 .grid-stack-item-content {
   color: black;

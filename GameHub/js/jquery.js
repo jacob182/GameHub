@@ -5,6 +5,15 @@ $(document).ready(function(){
 	 $("#meToggle").click(function(){
         $("#aboutme").slideToggle("slow");
     });
+    $("#brockToggle").click(function(){
+        $("#aboutbrock").slideToggle("slow");
+    });
+    $("#jordanToggle").click(function(){
+        $("#aboutjordan").slideToggle("slow");
+    });
+    $("#ianToggle").click(function(){
+        $("#aboutian").slideToggle("slow");
+    });
 });
 
 
