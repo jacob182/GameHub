@@ -44,7 +44,7 @@
 
 			<div class="field-wrap">
         <label>Confirm Password*</label>
-        <input onfocusout="checkpassword()" type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password*" required pattern=".{7,}"/>
+        <input onfocusout="check_password()" type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password*" required pattern=".{7,}"/>
 				<p id="passwordnotification" class="help is-danger"></p>
       </div>
 
