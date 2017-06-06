@@ -114,7 +114,6 @@ function register(){
 
 	var username = document.getElementById('username');
 	var email = document.getElementById('email');
-	var emailConf = document.getElementById('confirm-email');
 	var pass = document.getElementById('password');
 	var passwordConf = document.getElementById('confirm-password');
 	var emailpatt = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -124,14 +123,13 @@ function register(){
 	if(typeof(Storage) !== 'undefined') {
 		localStorage.setItem('username', username.value);
 		localStorage.setItem('email', email.value);
-		localStorage.setItem('emailConf', emailConf.value);
 		localStorage.setItem('pass', pass.value);
 		localStorage.setItem('passwordConf', passwordConf.value);
 	} else {
 		console.log('Web storage not supported!');
 	}
 
-	if(username.value == '' || email.value == '' || emailConf.value == '' || pass.value == '' || passwordConf.value == '') {
+	if(username.value == '' || email.value == '' || pass.value == '' || passwordConf.value == '') {
 		errorAnchor.innerHTML = 'All fields are required!';
 	} else {
 
@@ -172,11 +170,7 @@ function register(){
 		  errorAnchor.innerHTML = 'Please enter the same password.';
 		  return false;
 		}
-		if (email.value != emailConf.value)
-		{
-		  errorAnchor.innerHTML = 'Please enter the same email address.';
-		  return false;
-		}
+
 	}
 	return true;
 }

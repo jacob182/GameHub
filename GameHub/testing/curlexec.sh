@@ -1,15 +1,15 @@
-# Test website infastructure
-curl http://localhost//index.php
-echo ''
+# Test website structure
+curl http://localhost/gamehub/index.php
+echo 'website structuresuccessful'
 
-# Test page system
+# Test page
 curl http://localhost/gamehub/feed.php
-echo ''
+echo 'page testing successful'
 
 # Test website authentication redirects
 curl http://localhost/gamehub/profile.php
-echo ''
+echo 'authentication redirect successful'
 
 # Test login system
 curl --data "username=value1&password=value2" http://localhost/gamehub/login.php
-echo ''
+echo 'login system data successful'

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 06, 2017 at 03:14 AM
+-- Generation Time: Jun 06, 2017 at 07:27 AM
 -- Server version: 5.5.52-MariaDB
 -- PHP Version: 5.4.16
 
@@ -32,7 +32,14 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `Username` varchar(10) NOT NULL,
   `Comment_txt` varchar(100) NOT NULL,
   `Date_added` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`Comment_ID`, `Vid_ID`, `Username`, `Comment_txt`, `Date_added`) VALUES
+(5, 9, 'link182', 'bavba', 1496724941);
 
 -- --------------------------------------------------------
 
@@ -67,8 +74,8 @@ CREATE TABLE IF NOT EXISTS `members` (
 --
 
 INSERT INTO `members` (`Username`, `Email`, `Password`, `ClientImage`, `Description`, `Admin`, `followers`, `following`) VALUES
-('ianishungry', 'iankoala@gmail.com', 'a66fded995b220cb0b0ff053166fe101e8181ycd6r5uuuiokyn7zp8iypgv70c3lqf831afb4af6765ac1560db5597c4edfa2901f44c2f5eb01eaa82f862b4e3ac9e613f59fe1797c39eee88dac96f861c', '../images/profile_images/ianishungry.jpg', NULL, 1, 0, 0),
-('link182', 'jacobdcoorey@gmail.com', 'b540e075er67gxb0x25293e1v98nog2fsb02ji023eb2d8efdd1bc73d94f14d5a4331a2027e13f1bf037ec91fa00f565f7154a31da40871e56bd71fc064c588e59704a1dcf6a98ba0fa038e6261eaf83a', '../images/profile_images/link182.jpg', NULL, 2, 0, 0);
+('ianishungry', 'iankoala@gmail.com', 'a66fded995b220cb0b0ff053166fe101e8181ycd6r5uuuiokyn7zp8iypgv70c3lqf831afb4af6765ac1560db5597c4edfa2901f44c2f5eb01eaa82f862b4e3ac9e613f59fe1797c39eee88dac96f861c', '../images/profile_images/ianishungry.jpg', NULL, 0, 0, 0),
+('link182', 'jacobdcoorey@gmail.com', 'b540e075er67gxb0x25293e1v98nog2fsb02ji023eb2d8efdd1bc73d94f14d5a4331a2027e13f1bf037ec91fa00f565f7154a31da40871e56bd71fc064c588e59704a1dcf6a98ba0fa038e6261eaf83a', '../images/profile_images/link182.png', NULL, 2, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -95,7 +102,7 @@ CREATE TABLE IF NOT EXISTS `videos` (
   `Vid_url` varchar(100) NOT NULL,
   `Vid_description` varchar(100) NOT NULL,
   `Date_added` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `videos`
@@ -152,7 +159,7 @@ ALTER TABLE `videos`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `Comment_ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `Comment_ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `sessions`
 --
@@ -162,7 +169,7 @@ ALTER TABLE `sessions`
 -- AUTO_INCREMENT for table `videos`
 --
 ALTER TABLE `videos`
-  MODIFY `Vid_ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+  MODIFY `Vid_ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- Constraints for dumped tables
 --
@@ -171,6 +178,7 @@ ALTER TABLE `videos`
 -- Constraints for table `comments`
 --
 ALTER TABLE `comments`
+  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`Vid_ID`) REFERENCES `videos` (`Vid_ID`) ON DELETE CASCADE,
   ADD CONSTRAINT `account_delete_cmnt` FOREIGN KEY (`Username`) REFERENCES `members` (`Username`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
@@ -179,6 +187,12 @@ ALTER TABLE `comments`
 ALTER TABLE `followers`
   ADD CONSTRAINT `follower_delete` FOREIGN KEY (`followerID`) REFERENCES `members` (`Username`) ON DELETE CASCADE,
   ADD CONSTRAINT `following_delete` FOREIGN KEY (`followingID`) REFERENCES `members` (`Username`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `sessions`
+--
+ALTER TABLE `sessions`
+  ADD CONSTRAINT `sessions_ibfk_1` FOREIGN KEY (`Username`) REFERENCES `members` (`Username`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `videos`
