@@ -56,30 +56,30 @@
  	 	</div>
 	 </div>
 
-	 <div id="brockToggle">Click here to see Link182 himself.</div>
+	 <div id="brockToggle">Click here to see Rockeh900 himself.</div>
 	 <div id="aboutbrock">
 		 <div class="about-box">
  			<h2>Link182</h2>
  			<img class="challenger" src="..\images\bronze.png">
- 			<p>Basically challenger so if you think otherwise... <strong>B A N N E D.</strong> No questions asked.</p>
+ 			<p>Basically bronze so if you think otherwise... <strong>B A N N E D.</strong> No questions asked.</p>
  	 	</div>
 	 </div>
 
-	 <div id="jordanToggle">Click here to see Link182 himself.</div>
+	 <div id="jordanToggle">Click here to see JuicyJords himself.</div>
 	 <div id="aboutjordan">
 		 <div class="about-box">
  			<h2>Link182</h2>
  			<img class="challenger" src="..\images\gold.png">
- 			<p>Basically challenger so if you think otherwise... <strong>B A N N E D.</strong> No questions asked.</p>
+ 			<p>Basically gold so if you think otherwise... <strong>B A N N E D.</strong> No questions asked.</p>
  	 	</div>
 	 </div>
 
-	 <div id="ianToggle">Click here to see Link182 himself.</div>
+	 <div id="ianToggle">Click here to see IanZINCG himself.</div>
 	 <div id="aboutian">
 		 <div class="about-box">
  			<h2>Link182</h2>
  			<img class="challenger" src="..\images\silver.png">
- 			<p>Basically challenger so if you think otherwise... <strong>B A N N E D.</strong> No questions asked.</p>
+ 			<p>Basically silver so if you think otherwise... <strong>B A N N E D.</strong> No questions asked.</p>
  	 	</div>
 	 </div>
 
