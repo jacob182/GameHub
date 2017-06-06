@@ -105,6 +105,23 @@ function checkemail(){
   }
 }
 
+function confirm_password() {
+  var notification = document.getElementById("passwordnotification");
+  var password = document.getElementById("password");
+  var password_confirm = document.getElementById("confirm-password");
+  if (password.value != password_confirm.value){
+    notification.innerHTML = "Passwords do not match";
+    password.className = "input is-danger";
+    password_confirm.className = "input is-danger";
+    document.getElementById("regbtn").disabled = true;
+  } else {
+    password.className = "input is-success";
+    password_confirm.className = "input is-success";
+    notification.innerHTML = "";
+    document.getElementById("regbtn").disabled = false;
+  }
+}
+
 function showComments(VidID) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
