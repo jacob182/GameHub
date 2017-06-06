@@ -16,6 +16,7 @@
       echo "usernameOK";
     }
   }
+
   if(isset($_POST['email'])){
     $email = $_POST['email'];
     $count = count_email($email);
