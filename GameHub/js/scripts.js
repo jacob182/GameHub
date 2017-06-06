@@ -81,7 +81,7 @@ function checkemail(){
   } else {
     var xmlhttp = new XMLHttpRequest();
     var data = "email="+str;
-    xmlhttp.open("POST", "../controller/check_form_data.php", true);
+    xmlhttp.open("POST", "registration_check_process.php", true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.onreadystatechange = function(){
       if(this.readyState == 4 && this.status == 200){

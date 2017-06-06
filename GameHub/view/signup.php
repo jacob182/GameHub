@@ -47,7 +47,7 @@
         <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password*" required pattern=".{7,}"/>
       </div>
 
-      <input type="submit" id="regbtn" class="signupbtn" value= "Sign Up" disabled/>
+      <button id="regbtn" class="signupbtn" value= "Sign Up" disabled/>
 
     </form>
 		<a class="redirect" href='login.php'>Already registered? Login Now!</a>

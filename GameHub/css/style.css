@@ -499,8 +499,14 @@ div.profile-stats li span {
 .input.is-danger{
   border-color: #ff3860;
 }
+.input.is-success{
+  border-color: #1cf96a;
+}
 .help.is-danger{
   color: #ff3860;
+}
+.help.is-success{
+  color: #1cf96a;
 }
 footer {
   background:#292c2f;
