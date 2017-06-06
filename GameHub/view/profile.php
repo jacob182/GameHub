@@ -107,7 +107,10 @@
 		$stmt->execute(array($username));
 		$followers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		foreach($followers as $follower) {
-			print("{$follower['followingID']}<br />");
+			print('	<div class="follow-display">
+								<a class="author-avatar"> <img class="follow-avatar" src="' . get_avatar($follower['followingID']) . '" alt="Author Image"></a>');
+								echo" <a class='author-name'> {$follower["followingID"]} </a><br />
+							</div>";
 		}
 	?>
 
