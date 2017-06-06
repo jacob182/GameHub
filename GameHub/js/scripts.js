@@ -105,7 +105,7 @@ function checkemail(){
   }
 }
 
-function confirm_password() {
+function check_password() {
   var notification = document.getElementById("passwordnotification");
   var password = document.getElementById("password");
   var password_confirm = document.getElementById("confirm-password");
