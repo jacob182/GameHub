@@ -109,7 +109,7 @@
 		foreach($followers as $follower) {
 			print('	<div class="follow-display">
 								<a class="author-avatar"> <img class="follow-avatar" src="' . get_avatar($follower['followingID']) . '" alt="Author Image"></a>');
-								echo" <a class='author-name'> {$follower["followeingID"]} </a><br />
+								echo" <a class='author-name'> {$follower["followingID"]} </a><br />
 							</div>";
 	?>
 
