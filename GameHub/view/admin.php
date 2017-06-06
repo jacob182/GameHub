@@ -27,7 +27,7 @@
 
 		print("<h3>Edit {$user['Username']}'s Rank</h3>");
 		print("
-		<form class=method='POST'>
+		<form method='POST'>
 			<select name='rank'>
 				<option value='0'>Banned</option>
 				<option value='1'>User</option>
