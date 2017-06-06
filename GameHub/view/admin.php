@@ -3,7 +3,7 @@
 	session_start();
 
 	//provide the value of the $title variable for this page
-	$title = "Login";
+	$title = "Admin Page";
 
 	//retrieve the header
 	require('header.php');
