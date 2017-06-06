@@ -1,1 +1,1 @@
-find -type f -name "*.php" -exec php -l {} \;
+for /r %x in (*.php) do @php -l "%x"
