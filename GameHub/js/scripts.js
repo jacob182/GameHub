@@ -117,7 +117,7 @@ function check_password() {
   } else {
     password.className = "input is-success";
     password_confirm.className = "input is-success";
-    notification.innerHTML = "";
+    notification.innerHTML = "Passwords match";
     document.getElementById("regbtn").disabled = false;
   }
 }
