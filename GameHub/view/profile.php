@@ -89,7 +89,7 @@
 		$followers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		foreach($followers as $follower) {
 			print('	<div class="follow-display">
-								<a href="../view/profile.php?username=' . $follower['followingID'] . '" class="author-avatar"> <img class="follow-avatar" src="' . get_avatar($follower['followerID']) . '" alt="Author Image"></a>');
+								<a href="../view/profile.php?username=' . $follower['followerID'] . '" class="author-avatar"> <img class="follow-avatar" src="' . get_avatar($follower['followerID']) . '" alt="Author Image"></a>');
 								print(' <a href="../view/profile.php?username=' . $follower['followerID'] . '" class="author-name">');
 								echo "{$follower["followerID"]} </a><br />
 							</div>";
