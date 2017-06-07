@@ -70,7 +70,7 @@ ini_set('display_errors',1);
 		<input type="submit" class="profilebtn" value="Save Changes" />
 	</form>
 	<form class="delete-account" method="POST" action="delete_account_process.php">
-		<input class="profilebtn" type="submit" onclick="confirm('Are you sure you want to delete your account?');" name="delete" value="Delete Account"/>
+		<input class="profilebtn" type="submit" onclick="return confirm('Are you sure you want to delete this video?')" name="delete" value="Delete Account"/>
 	</form>
 </div>
 <?php
