@@ -1,6 +1,6 @@
 <?php
 	session_start();
-  if(!isset($_GET['action'])) die(header('location: /view/profile.php'));
+  if(!isset($_GET['action'])) die(header('location: ../view/profile.php'));
   include('../model/database.php');
   include('../model/function_members.php');
   global $conn;

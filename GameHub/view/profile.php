@@ -89,8 +89,9 @@
 		$followers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		foreach($followers as $follower) {
 			print('	<div class="follow-display">
-								<a class="author-avatar"> <img class="follow-avatar" src="' . get_avatar($follower['followerID']) . '" alt="Author Image"></a>');
-								echo" <a class='author-name'> {$follower["followerID"]} </a><br />
+								<a href="../view/profile.php?username=' . $follower['followingID'] . '" class="author-avatar"> <img class="follow-avatar" src="' . get_avatar($follower['followerID']) . '" alt="Author Image"></a>');
+								print(' <a href="../view/profile.php?username=' . $follower['followerID'] . '" class="author-name">');
+								echo "{$follower["followerID"]} </a><br />
 							</div>";
 		}
 	?>
@@ -108,8 +109,9 @@
 		$followers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		foreach($followers as $follower) {
 			print('	<div class="follow-display">
-								<a class="author-avatar"> <img class="follow-avatar" src="' . get_avatar($follower['followingID']) . '" alt="Author Image"></a>');
-								echo" <a class='author-name'> {$follower["followingID"]} </a><br />
+								<a href="../view/profile.php?username=' . $follower['followingID'] . '" class="author-avatar"> <img class="follow-avatar" src="' . get_avatar($follower['followingID']) . '" alt="Author Image"></a>');
+								print(' <a href="../view/profile.php?username=' . $follower['followingID'] . '" class="author-name">');
+								echo "{$follower["followingID"]} </a><br />
 							</div>";
 		}
 	?>
