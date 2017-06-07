@@ -27,18 +27,15 @@
 		<div id="errorAnchor"></div>
       <div class="field-wrap">
         <label> Username*</label>
-        <input type="text" id="username" name="username" placeholder="Enter username" required/>
+        <input onfocusout="checkusername()" type="text" id="username" class="input" name="username" placeholder="Enter username" required/>
+				<p id="usernamenotification" class="help is-danger"></p>
       </div>
 
       <div class="field-wrap">
         <label>Email Address*</label>
-        <input type="email" id="email" name="email" placeholder="Enter your email*" required/>
+        <input onfocusout="checkemail()" type="email" id="email" class="input" name="email" placeholder="Enter your email*" required/>
+				<p id="emailnotification" class="help is-danger"></p>
       </div>
-
-			<div class="field-wrap">
-				<label>Confirm Email Address*</label>
-				<input type="email" id="confirm-email" name="confirm-email" placeholder="Enter your email*" required/>
-			</div>
 
       <div class="field-wrap">
         <label>Password*</label>
@@ -47,10 +44,11 @@
 
 			<div class="field-wrap">
         <label>Confirm Password*</label>
-        <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password*" required pattern=".{7,}"/>
+        <input onfocusout="check_password()" type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password*" required pattern=".{7,}"/>
+				<p id="passwordnotification" class="help is-danger"></p>
       </div>
 
-      <input type="submit" class="signupbtn" value = "Sign Up" />
+      <button id="regbtn" class="signupbtn" disabled/>Sign Up</button>
 
     </form>
 		<a class="redirect" href='login.php'>Already registered? Login Now!</a>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 06, 2017 at 03:14 AM
+-- Generation Time: Jun 07, 2017 at 04:02 AM
 -- Server version: 5.5.52-MariaDB
 -- PHP Version: 5.4.16
 
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `Username` varchar(10) NOT NULL,
   `Comment_txt` varchar(100) NOT NULL,
   `Date_added` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -41,9 +41,10 @@ CREATE TABLE IF NOT EXISTS `comments` (
 --
 
 CREATE TABLE IF NOT EXISTS `followers` (
-  `followerID` varchar(255) NOT NULL,
-  `followingID` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `follow_ID` int(11) NOT NULL,
+  `followingID` varchar(12) DEFAULT NULL,
+  `followerID` varchar(12) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -56,19 +57,21 @@ CREATE TABLE IF NOT EXISTS `members` (
   `Email` varchar(100) NOT NULL,
   `Password` varchar(255) NOT NULL,
   `ClientImage` varchar(255) DEFAULT NULL,
-  `Description` varchar(150) DEFAULT NULL,
   `Admin` tinyint(1) NOT NULL DEFAULT '1',
-  `followers` int(11) NOT NULL,
-  `following` int(11) NOT NULL
+  `followers` int(11) DEFAULT NULL,
+  `following` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `members`
 --
 
-INSERT INTO `members` (`Username`, `Email`, `Password`, `ClientImage`, `Description`, `Admin`, `followers`, `following`) VALUES
-('ianishungry', 'iankoala@gmail.com', 'a66fded995b220cb0b0ff053166fe101e8181ycd6r5uuuiokyn7zp8iypgv70c3lqf831afb4af6765ac1560db5597c4edfa2901f44c2f5eb01eaa82f862b4e3ac9e613f59fe1797c39eee88dac96f861c', '../images/profile_images/ianishungry.jpg', NULL, 1, 0, 0),
-('link182', 'jacobdcoorey@gmail.com', 'b540e075er67gxb0x25293e1v98nog2fsb02ji023eb2d8efdd1bc73d94f14d5a4331a2027e13f1bf037ec91fa00f565f7154a31da40871e56bd71fc064c588e59704a1dcf6a98ba0fa038e6261eaf83a', '../images/profile_images/link182.jpg', NULL, 2, 0, 0);
+INSERT INTO `members` (`Username`, `Email`, `Password`, `ClientImage`, `Admin`, `followers`, `following`) VALUES
+('azngeoffdog', 'geoffrey.lai1@gmail.com', '029d23a19d63c2fef4a4b15e2002eefd424a5aa64784789efa15df028343f5687bdf6d833e35a582a32448b0aaf97emlm5d21k6tj2k76hox17u3e809qjx7n965f785184dac9f72ab7a499df678d06a02', NULL, 1, 0, 0),
+('ianishungry', 'iankoala@gmail.com', 'a66fded995b220cb0b0ff053166fe101e8181ycd6r5uuuiokyn7zp8iypgv70c3lqf831afb4af6765ac1560db5597c4edfa2901f44c2f5eb01eaa82f862b4e3ac9e613f59fe1797c39eee88dac96f861c', '../images/profile_images/ianishungry.jpg', 0, 0, 0),
+('jordan2', 'jordan@gmail.com', 'b6aa86af3h2pmtzmqq62qefqev6o53wqr73601yq23f4ead9a4c7e2550ce4152174c5e8db424a1d86d3c15495bf95827b1efb9180255400e0aafe69c4a85467da9f5cb0ce267c116c95b9e0441973594a', NULL, 1, 0, 0),
+('jordan20', 'jordan@gmail.coms', '08089a69d6e38ca7cad31c3cf6m96ef9nli3ufo21u9dxpn2d61q2lk5yu8219aec00b26d9d4f0b9500ca011bacfcbacb6ca36445ca59dd011e113df467c4de3cdd5bf4a777caf5641eb6bd4c2faccea72', NULL, 1, 0, 0),
+('link182', 'jacobdcoorey@gmail.com', 'b540e075er67gxb0x25293e1v98nog2fsb02ji023eb2d8efdd1bc73d94f14d5a4331a2027e13f1bf037ec91fa00f565f7154a31da40871e56bd71fc064c588e59704a1dcf6a98ba0fa038e6261eaf83a', '../images/profile_images/link182.jpg', 2, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -93,9 +96,9 @@ CREATE TABLE IF NOT EXISTS `videos` (
   `Username` varchar(10) NOT NULL,
   `Vid_name` varchar(30) NOT NULL,
   `Vid_url` varchar(100) NOT NULL,
-  `Vid_description` varchar(100) NOT NULL,
+  `Vid_description` varchar(100) DEFAULT NULL,
   `Date_added` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `videos`
@@ -120,9 +123,9 @@ ALTER TABLE `comments`
 -- Indexes for table `followers`
 --
 ALTER TABLE `followers`
-  ADD PRIMARY KEY (`followerID`,`followingID`),
-  ADD KEY `followerID` (`followerID`),
-  ADD KEY `following_delete` (`followingID`);
+  ADD PRIMARY KEY (`follow_ID`),
+  ADD KEY `following_ID` (`followingID`),
+  ADD KEY `follower_ID` (`followerID`);
 
 --
 -- Indexes for table `members`
@@ -152,7 +155,12 @@ ALTER TABLE `videos`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `Comment_ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `Comment_ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `followers`
+--
+ALTER TABLE `followers`
+  MODIFY `follow_ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `sessions`
 --
@@ -162,7 +170,7 @@ ALTER TABLE `sessions`
 -- AUTO_INCREMENT for table `videos`
 --
 ALTER TABLE `videos`
-  MODIFY `Vid_ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+  MODIFY `Vid_ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- Constraints for dumped tables
 --
@@ -171,14 +179,21 @@ ALTER TABLE `videos`
 -- Constraints for table `comments`
 --
 ALTER TABLE `comments`
+  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`Vid_ID`) REFERENCES `videos` (`Vid_ID`) ON DELETE CASCADE,
   ADD CONSTRAINT `account_delete_cmnt` FOREIGN KEY (`Username`) REFERENCES `members` (`Username`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `followers`
 --
 ALTER TABLE `followers`
-  ADD CONSTRAINT `follower_delete` FOREIGN KEY (`followerID`) REFERENCES `members` (`Username`) ON DELETE CASCADE,
-  ADD CONSTRAINT `following_delete` FOREIGN KEY (`followingID`) REFERENCES `members` (`Username`) ON DELETE CASCADE;
+  ADD CONSTRAINT `followers_ibfk_1` FOREIGN KEY (`followingID`) REFERENCES `members` (`Username`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`followerID`) REFERENCES `members` (`Username`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `sessions`
+--
+ALTER TABLE `sessions`
+  ADD CONSTRAINT `sessions_ibfk_1` FOREIGN KEY (`Username`) REFERENCES `members` (`Username`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `videos`

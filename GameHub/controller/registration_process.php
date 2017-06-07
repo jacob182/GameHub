@@ -10,7 +10,6 @@
 <?php
 	//retrieve the registration details into the form
   $username = $_POST['username'];
-	$confirmemail = $_POST['confirm-email'];
 	$confirmpassword = $_POST['confirm-password'];
 	$email = $_POST['email'];
 	$password = $_POST['password'];
@@ -29,13 +28,6 @@ elseif (strlen($password) < 7)
 		header("location:/view/signup.php");
 		exit();
 	}
-
-elseif ($email != $confirmemail)
-{
-	$_SESSION['error'] = 'Please enter the same email address.';
-	header("location:/view/signup.php");
-	exit();
-}
 
 elseif ($password != $confirmpassword)
 {
