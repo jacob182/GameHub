@@ -16,7 +16,7 @@
 	function count_email($email)
 	{
 	  global $conn;
-	  $sql = 'SELECT * FROM users WHERE email = :email';
+	  $sql = 'SELECT * FROM members WHERE email = :email';
 	  $statement = $conn->prepare($sql);
 	  $statement->bindValue(':email', $email);
 	  $statement->execute();
