@@ -8,6 +8,9 @@ Admin page can be found through the link in the footer!
 Username: Link182
 Password: password
 
-# Bugs
-
+# Testing setup :
+XAMPP control panel start apache & MySQL
+Import database under 'gamehub'
+Move required files required folders (htdocs)
+Run through localhost
 ---------- 
