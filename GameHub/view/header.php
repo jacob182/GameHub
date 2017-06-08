@@ -38,7 +38,6 @@
           </a>
           <ul>
             <li><a href="feed.php">Discover</a></li> -
-            <li><a href="about.php">About</a></li> -
             <?php
             if(isLogged()) {
               print("<li><a href='your_feed.php'>Your Feed</a></li> -");
@@ -52,7 +51,7 @@
             } else {
             }
             ?>
-
+            <li><a href="about.php">About</a></li>
           </ul>
           <div id="clear"></div>
         </div>

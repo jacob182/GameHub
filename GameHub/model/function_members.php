@@ -54,12 +54,13 @@
       $statement->execute();
       $result = $statement->fetchAll();
       $statement->closeCursor();
-        $count = $statement->rowCount();
+      $count = $statement->rowCount();
         if($count != 0) {
             if($result[0]['admin'] == 0) {
                 return 2;
             }
             if(compareHash($result[0]['password'], $password)) {
+								$_SESSION['admin'] = $result[0]['admin'];
                 return 1;
             } else {
                 return 0;
@@ -78,16 +79,7 @@
 
 	function admin()
 	{
-		global $conn;
-		$sql = "SELECT * FROM members WHERE username = :username AND  Admin = :admin";
-		$statement = $conn->prepare($sql);
-		$statement->bindValue(':username', $_SESSION['user']);
-		$statement->bindValue(':admin', '2');
-		$statement->execute();
-		$result = $statement->fetchAll();
-		$statement->closeCursor();
-
-		if(!empty($result)) {
+		if($_SESSION['admin'] == '2') {
             return true;
         }
         return false;

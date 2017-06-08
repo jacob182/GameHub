@@ -10,8 +10,6 @@
 	$username = $_POST['username'];
 	$password = $_POST['password'];
 
-	//call the retrieve_salt() function
-
 
 	//call the login() function
 		$count = login($username, $password);
