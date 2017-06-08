@@ -25,15 +25,15 @@
 	$user = get_member($username);
 
 	global $conn;
-	$stmt = $conn->prepare("SELECT count(*) FROM `videos` WHERE `Username` = ?");
-	$stmt->execute(array($username));
+	$stmt = $conn->prepare("SELECT count(*) FROM `videos` WHERE `member_ID` = ?");
+	$stmt->execute(array($user['member_ID']));
 	$vidCount = $stmt->fetch();
 	$vidCount = $vidCount['count(*)'];
 
 	//Generate the follow/unfollow link based on if the user has followed the profile
 	if(isLogged() && $username != $_SESSION['user']) {
 		$stmt = $conn->prepare("SELECT * FROM `followers` WHERE `followerID` = ? AND `followingID` = ?");
-		$stmt->execute(array($_SESSION['user'], $username));
+		$stmt->execute(array(get_member($_SESSION['user'])['member_ID'], get_member($username)['member_ID']));
 		$check = $stmt->fetch();
 		if(!empty($check)) {
 			$followTxt = "<li><a class='follow' href='../controller/follow_process.php?username={$username}'>Unfollow</a></li>";
@@ -85,13 +85,14 @@
 	<div class="followerspop fspop">
 	<?php
 		$stmt = $conn->prepare("select * from `followers` WHERE `followingID` = ?");
-		$stmt->execute(array($username));
+		$stmt->execute(array($user['member_ID']));
 		$followers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		foreach($followers as $follower) {
+			$uploader = get_member_by_id($follower['followerID']);
 			print('	<div class="follow-display">
-								<a href="../view/profile.php?username=' . $follower['followerID'] . '" class="author-avatar"> <img class="follow-avatar" src="' . get_avatar($follower['followerID']) . '" alt="Author Image"></a>');
-								print(' <a href="../view/profile.php?username=' . $follower['followerID'] . '" class="author-name">');
-								echo "{$follower["followerID"]} </a><br />
+								<a href="../view/profile.php?username=' . $uploader['Username'] . '" class="author-avatar"> <img class="follow-avatar" src="' . get_avatar($uploader['Username']) . '" alt="Author Image"></a>');
+								print(' <a href="../view/profile.php?username=' . $uploader['Username'] . '" class="author-name">');
+								echo "{$uploader["Username"]} </a><br />
 							</div>";
 		}
 	?>
@@ -104,14 +105,15 @@
   </div>
 	<div class="followedpop fdpop">
 	<?php
-		$stmt = $conn->prepare("select * from `followers` WHERE `followerID` = '$username'");
-		$stmt->execute(array($username));
+		$stmt = $conn->prepare("select * from followers WHERE followerID = ?");
+		$stmt->execute(array($user['member_ID']));
 		$followers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		foreach($followers as $follower) {
+				$uploader = get_member_by_id($follower['followingID']);
 			print('	<div class="follow-display">
-								<a href="../view/profile.php?username=' . $follower['followingID'] . '" class="author-avatar"> <img class="follow-avatar" src="' . get_avatar($follower['followingID']) . '" alt="Author Image"></a>');
-								print(' <a href="../view/profile.php?username=' . $follower['followingID'] . '" class="author-name">');
-								echo "{$follower["followingID"]} </a><br />
+								<a href="../view/profile.php?username=' . $uploader['Username'] . '" class="author-avatar"> <img class="follow-avatar" src="' . get_avatar($uploader['Username']) . '" alt="Author Image"></a>');
+								print(' <a href="../view/profile.php?username=' . $uploader['Username'] . '" class="author-name">');
+								echo "{$uploader["Username"]} </a><br />
 							</div>";
 		}
 	?>
@@ -136,20 +138,21 @@
 		}
 
 		global $conn;
-		$stmt = $conn->prepare("SELECT * FROM `videos` WHERE `Username` = ? ORDER BY Date_added DESC LIMIT 5 ");
-		$stmt->execute(array($username));
+		$stmt = $conn->prepare("SELECT * FROM `videos` WHERE `member_ID` = ? ORDER BY Date_added DESC LIMIT 5 ");
+		$stmt->execute(array($user['member_ID']));
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		print('</div><div class="profile-feed" style="margin:0 auto;">');
 		foreach ($result as $item){
+			$uploader = get_member_by_id($item['member_ID']);
                         echo '<div class="feed-item">
                                  <div class="feed-video">
                                      <video src="../' . $item['Vid_url'] . '" width="100%" controls></video>
                                  </div>
 																 <div class="feed-description">
-	 				                          <a class="author-avatar" href="../view/profile.php?username=' . $item['Username'] . '"><img class="avatar" src="' . get_avatar($item['Username']) . '" alt="Author Image"></a>
-	 				                          <p class="mt9"><a class="author-name" href="../view/profile.php?username=' . $item['Username'] . '">' . $item['Username'] . '</a>' . $item['Vid_description'] . '</p>';
+	 				                          <a class="author-avatar" href="../view/profile.php?username=' . $uploader['Username'] . '"><img class="avatar" src="' . get_avatar($uploader['Username']) . '" alt="Author Image"></a>
+	 				                          <p class="mt9"><a class="author-name" href="../view/profile.php?username=' . $uploader['Username'] . '">' . $uploader['Username'] . '</a>' . $item['Vid_description'] . '</p>';
 			                                    if(isLogged()){
-			                                      if($item['Username'] == $_SESSION['user']) {
+			                                      if($uploader['Username'] == $_SESSION['user']) {
 			                                        ?>
 			                                        <a href="../controller/delete_video_process.php?vidID=<?php echo $item["Vid_ID"]; ?>" onclick="return confirm('Are you sure you want to delete this video?')">
 			                                          <button class="delete-video">Delete Video</button>
@@ -171,13 +174,14 @@
         $commentCount = intVal(get_comment_count($item['Vid_ID'])['commentCount']);
 
           foreach ($result as $item) {
+					$uploader = get_member_by_id($item['member_ID']);
 						echo '<div class="comment-list">
 	            <div class="comment-entry">
-	              <a class="author-avatar" href=""><img class="avatar comment-avatar" src="' . get_avatar($item['Username']) . '" alt="Author Image"></a>
-	              <p class="mt4"><a class="author-name" href="">' . $item['Username'] . '</a>' . $item['Comment_txt'] . '</p>
+	              <a class="author-avatar" href=""><img class="avatar comment-avatar" src="' . get_avatar($uploader['Username']) . '" alt="Author Image"></a>
+	              <p class="mt4"><a class="author-name" href="">' . $uploader['Username'] . '</a>' . $item['Comment_txt'] . '</p>
 	              ';
               if(isLogged()){
-                if($item['Username'] == $_SESSION['user']) {
+                if($uploader['Username'] == $_SESSION['user']) {
                   ?>
                   <a href="../controller/delete_comment_process.php?commentID=<?php echo $item["Comment_ID"]; ?>" onclick="return confirm('Are you sure you want to delete this comment?')">
                     <button class="delete-comment">X</button>

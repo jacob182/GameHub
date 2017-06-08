@@ -17,13 +17,18 @@
 	  for($i = 0; $i < count($results); $i++) {
 		  $results[$i]['owned'] = 0;
 		  if(isLogged()) {
-        if($_SESSION['user'] == $results[$i]['Username']) {
+				$user = get_member($_SESSION['user']);
+        if($user['member_ID'] == $results[$i]['member_ID']) {
 				  $results[$i]['owned'] = 1;
 			  }
 		  }
 
-		//Append avatar url to comments
-		$results[$i]['ClientImage'] = get_avatar($results[$i]['Username']);
+			//Append avatar url to comments
+	        $avatar = get_member_by_id($results[$i]['member_ID']);
+	        $results[$i]['ClientImage'] = get_avatar($avatar['Username']);
+
+	        // acquire the username of each comment
+	        $results[$i]['Username'] = $avatar['Username'];
 	  }
 
       $response = json_encode($results);

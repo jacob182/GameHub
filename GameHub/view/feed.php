@@ -16,8 +16,8 @@
     $user = get_member($username);
 
     global $conn;
-    $stmt = $conn->prepare("SELECT count(*) FROM `videos` WHERE `Username` = ?");
-    $stmt->execute(array($username));
+    $stmt = $conn->prepare("SELECT count(*) FROM `videos` WHERE `member_ID` = ?");
+    $stmt->execute(array($user['member_ID']));
     $vidCount = $stmt->fetch();
     $vidCount = $vidCount['count(*)'];
       print('<div class="profile-boxmb">
@@ -60,8 +60,8 @@
           $user = get_member($username);
 
           global $conn;
-          $stmt = $conn->prepare("SELECT count(*) FROM `videos` WHERE `Username` = ?");
-          $stmt->execute(array($username));
+          $stmt = $conn->prepare("SELECT count(*) FROM `videos` WHERE `member_ID` = ?");
+          $stmt->execute(array($user['member_ID']));
           $vidCount = $stmt->fetch();
           $vidCount = $vidCount['count(*)'];
             print('<div class="profile-box">
@@ -106,15 +106,16 @@
         $result = $statement->fetchAll();
         $statement->closeCursor();
         foreach ($result as $item){
+        $uploader = get_member_by_id($item['member_ID']);
                 echo '<div class="feed-item">
                          <div class="feed-video">
                             <video src="../' . $item['Vid_url'] . '" width="100%" controls></video>
                          </div>
                         <div class="feed-description">
-                          <a class="author-avatar" href="profile.php?username=' . $item['Username'] . '"><img class="avatar" src="' . get_avatar($item['Username']) . '" alt="Author Image"></a>
-                          <p class="mt9"><a class="author-name" href="profile.php?username=' . $item['Username'] . '">' . $item['Username'] . '</a>' . $item['Vid_description'] . '</p>';
+                          <a class="author-avatar" href="profile.php?username=' . $uploader['Username'] . '"><img class="avatar" src="' . get_avatar($uploader['Username']) . '" alt="Author Image"></a>
+                          <p class="mt9"><a class="author-name" href="profile.php?username=' . $uploader['Username'] . '">' . $uploader['Username'] . '</a>' . $item['Vid_description'] . '</p>';
                             if(isLogged()){
-                              if($item['Username'] == $_SESSION['user']) {
+                              if($uploader['Username'] == $_SESSION['user']) {
                                 ?>
                                 <a  href="../controller/delete_video_process.php?vidID=<?php echo $item["Vid_ID"]; ?>" onclick="return confirm('Are you sure you want to delete this video?')">
                                   <button class="delete-video">Delete Video</button>
@@ -134,15 +135,15 @@
         $result = $statement->fetchAll();
         $statement->closeCursor();
         $commentCount = intVal(get_comment_count($item['Vid_ID'])['commentCount']);
-
+        $uploader = get_member_by_id($item['member_ID']);
           foreach ($result as $item) {
           echo '<div class="comment-list">
             <div class="comment-entry">
-              <a class="author-avatar" href="profile.php?username=' . $item['Username'] . '"><img class="avatar comment-avatar" src="' . get_avatar($item['Username']) . '" alt="Author Image"></a>
-              <p class="mt4"><a class="author-name" href="profile.php?username=' . $item['Username'] . '">' . $item['Username'] . '</a>' . $item['Comment_txt'] . '</p>
+              <a class="author-avatar" href="profile.php?username=' . $uploader['Username'] . '"><img class="avatar comment-avatar" src="' . get_avatar($uploader['Username']) . '" alt="Author Image"></a>
+              <p class="mt4"><a class="author-name" href="profile.php?username=' . $uploader['Username'] . '">' . $uploader['Username'] . '</a>' . $item['Comment_txt'] . '</p>
               ';
               if(isLogged()){
-                if($item['Username'] == $_SESSION['user']) {
+                if($uploader['Username'] == $_SESSION['user']) {
                   ?>
                   <a href="../controller/delete_comment_process.php?commentID=<?php echo $item["Comment_ID"]; ?>" onclick="return confirm('Are you sure you want to delete this comment?')">
                     <button class="delete-comment">X</button>

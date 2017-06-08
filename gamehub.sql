@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 08, 2017 at 09:25 AM
+-- Generation Time: Jun 08, 2017 at 06:59 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.6.23
 
@@ -27,9 +27,9 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `comments` (
-  `Comment_ID` int(11) NOT NULL,
-  `Vid_ID` int(11) NOT NULL,
-  `Username` varchar(10) NOT NULL,
+  `Comment_ID` int(11) UNSIGNED NOT NULL,
+  `Vid_ID` int(11) UNSIGNED NOT NULL,
+  `member_ID` int(11) UNSIGNED NOT NULL,
   `Comment_txt` varchar(100) NOT NULL,
   `Date_added` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -38,10 +38,10 @@ CREATE TABLE `comments` (
 -- Dumping data for table `comments`
 --
 
-INSERT INTO `comments` (`Comment_ID`, `Vid_ID`, `Username`, `Comment_txt`, `Date_added`) VALUES
-(7, 11, 'link182', 'comment', 1496843751),
-(8, 11, 'link182', 'comment', 1496843906),
-(9, 11, 'link182', 'comment', 1496843910);
+INSERT INTO `comments` (`Comment_ID`, `Vid_ID`, `member_ID`, `Comment_txt`, `Date_added`) VALUES
+(2, 10, 1, 'Comment 1', 1496935157),
+(3, 10, 1, 'Comment 2', 1496935187),
+(4, 10, 1, 'comment 3', 1496935194);
 
 -- --------------------------------------------------------
 
@@ -50,9 +50,9 @@ INSERT INTO `comments` (`Comment_ID`, `Vid_ID`, `Username`, `Comment_txt`, `Date
 --
 
 CREATE TABLE `followers` (
-  `follow_ID` int(11) NOT NULL,
-  `followingID` varchar(12) DEFAULT NULL,
-  `followerID` varchar(12) DEFAULT NULL
+  `follow_ID` int(11) UNSIGNED NOT NULL,
+  `followingID` int(11) UNSIGNED NOT NULL,
+  `followerID` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -60,8 +60,8 @@ CREATE TABLE `followers` (
 --
 
 INSERT INTO `followers` (`follow_ID`, `followingID`, `followerID`) VALUES
-(5, 'link182', 'username'),
-(6, 'username', 'link182');
+(8, 1, 2),
+(9, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -70,22 +70,23 @@ INSERT INTO `followers` (`follow_ID`, `followingID`, `followerID`) VALUES
 --
 
 CREATE TABLE `members` (
-  `Username` varchar(12) NOT NULL,
-  `Email` varchar(100) NOT NULL,
+  `member_ID` int(11) UNSIGNED NOT NULL,
+  `Username` varchar(12) NOT NULL DEFAULT '',
   `Password` varchar(255) NOT NULL,
+  `Email` varchar(100) NOT NULL DEFAULT '',
   `ClientImage` varchar(255) DEFAULT NULL,
   `Admin` tinyint(1) NOT NULL DEFAULT '1',
-  `followers` int(11) NOT NULL DEFAULT '0',
-  `following` int(11) NOT NULL DEFAULT '0'
+  `followers` int(11) UNSIGNED NOT NULL DEFAULT '0',
+  `following` int(11) UNSIGNED NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `members`
 --
 
-INSERT INTO `members` (`Username`, `Email`, `Password`, `ClientImage`, `Admin`, `followers`, `following`) VALUES
-('link182', 'jacobcoorey@gmail.com', 'f07a2acd1f939e7e68p19t87stazz139nt54tk683hqqffh37295d183345ea3a2d749e314d1aef3f7c83328cf2eb449cb39747df435cd6e7680a9daa62212b38fc01c7f7b7552f55c1ea442b0e5040278', '../images/profile_images/link182.jpg', 2, 1, 1),
-('username', 'user@gmail.com', '08a38c4d37d35252bpikwtd4uk57i8mr0u6mbm48011qxoqy9593ffb507fc289ea040f92a9e13a74cf2b59d06868b02284e864ce4fd9c1685ce03f7615d7e05bba66df0c235180fa7721297e1dd777dce', NULL, 1, 1, 1);
+INSERT INTO `members` (`member_ID`, `Username`, `Password`, `Email`, `ClientImage`, `Admin`, `followers`, `following`) VALUES
+(1, 'link182', '68183c365dffc040q52k3133891r4c70x036v531bdwiya59afda268e054dc7155029ae154cad61ff8d5eb16c76a2e60ac2d2196e150a5be967889d9a2946239a8ecab29b81ec132c9af7f5683e5df63d', 'jacobcoorey@gmail.com', '../images/profile_images/Link182.jpg', 1, 1, 1),
+(2, 'username', '22733038c58d53ab5re9gr999wjvtvg177hvg6s25s3e8rdg925a3b18556eb44bcfbe2195cfee02782d3e12e452e96f95da3035bb8908c98988f754398046ab0cc6fa65a7cda62e3eaf1368274e35a793', 'email@email.com', NULL, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -94,8 +95,8 @@ INSERT INTO `members` (`Username`, `Email`, `Password`, `ClientImage`, `Admin`, 
 --
 
 CREATE TABLE `sessions` (
-  `Session_ID` int(11) NOT NULL,
-  `Username` varchar(10) NOT NULL,
+  `Session_ID` int(11) UNSIGNED NOT NULL,
+  `member_ID` int(11) UNSIGNED NOT NULL,
   `Logged_in` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -106,11 +107,11 @@ CREATE TABLE `sessions` (
 --
 
 CREATE TABLE `videos` (
-  `Vid_ID` int(11) NOT NULL,
-  `Username` varchar(10) NOT NULL,
+  `Vid_ID` int(11) UNSIGNED NOT NULL,
+  `member_ID` int(11) UNSIGNED NOT NULL,
   `Vid_name` varchar(30) NOT NULL,
   `Vid_url` varchar(100) NOT NULL,
-  `Vid_description` varchar(100) DEFAULT NULL,
+  `Vid_description` varchar(100) NOT NULL,
   `Date_added` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -118,8 +119,8 @@ CREATE TABLE `videos` (
 -- Dumping data for table `videos`
 --
 
-INSERT INTO `videos` (`Vid_ID`, `Username`, `Vid_name`, `Vid_url`, `Vid_description`, `Date_added`) VALUES
-(11, 'link182', 'Short video clip-nature.mp4.mp', 'videos/uploads/MjY3Nzkx.mp4', 'Video Description', 1496838264);
+INSERT INTO `videos` (`Vid_ID`, `member_ID`, `Vid_name`, `Vid_url`, `Vid_description`, `Date_added`) VALUES
+(10, 1, 'Short video clip-nature.mp4', 'videos/uploads/NTE2MA==.mp4', '', 1496932879);
 
 --
 -- Indexes for dumped tables
@@ -131,35 +132,35 @@ INSERT INTO `videos` (`Vid_ID`, `Username`, `Vid_name`, `Vid_url`, `Vid_descript
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`Comment_ID`),
   ADD KEY `Vid_ID` (`Vid_ID`),
-  ADD KEY `Username` (`Username`);
+  ADD KEY `member_ID` (`member_ID`);
 
 --
 -- Indexes for table `followers`
 --
 ALTER TABLE `followers`
   ADD PRIMARY KEY (`follow_ID`),
-  ADD KEY `following_ID` (`followingID`),
-  ADD KEY `follower_ID` (`followerID`);
+  ADD KEY `followingID` (`followingID`),
+  ADD KEY `followerID` (`followerID`);
 
 --
 -- Indexes for table `members`
 --
 ALTER TABLE `members`
-  ADD PRIMARY KEY (`Username`);
+  ADD PRIMARY KEY (`member_ID`);
 
 --
 -- Indexes for table `sessions`
 --
 ALTER TABLE `sessions`
   ADD PRIMARY KEY (`Session_ID`),
-  ADD KEY `Username` (`Username`);
+  ADD KEY `member_ID` (`member_ID`);
 
 --
 -- Indexes for table `videos`
 --
 ALTER TABLE `videos`
   ADD PRIMARY KEY (`Vid_ID`),
-  ADD KEY `Username` (`Username`);
+  ADD KEY `member_ID` (`member_ID`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -169,22 +170,27 @@ ALTER TABLE `videos`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `Comment_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `Comment_ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `followers`
 --
 ALTER TABLE `followers`
-  MODIFY `follow_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `follow_ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT for table `members`
+--
+ALTER TABLE `members`
+  MODIFY `member_ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `sessions`
 --
 ALTER TABLE `sessions`
-  MODIFY `Session_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Session_ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `videos`
 --
 ALTER TABLE `videos`
-  MODIFY `Vid_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `Vid_ID` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- Constraints for dumped tables
 --
@@ -193,21 +199,27 @@ ALTER TABLE `videos`
 -- Constraints for table `comments`
 --
 ALTER TABLE `comments`
-  ADD CONSTRAINT `account_delete_cmnt` FOREIGN KEY (`Username`) REFERENCES `members` (`Username`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`Vid_ID`) REFERENCES `videos` (`Vid_ID`) ON DELETE CASCADE;
+  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`Vid_ID`) REFERENCES `videos` (`Vid_ID`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`member_ID`) REFERENCES `members` (`member_ID`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `followers`
 --
 ALTER TABLE `followers`
-  ADD CONSTRAINT `followers_ibfk_1` FOREIGN KEY (`followingID`) REFERENCES `members` (`Username`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`followerID`) REFERENCES `members` (`Username`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `followers_ibfk_1` FOREIGN KEY (`followingID`) REFERENCES `members` (`member_ID`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `followers_ibfk_2` FOREIGN KEY (`followerID`) REFERENCES `members` (`member_ID`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `sessions`
 --
 ALTER TABLE `sessions`
-  ADD CONSTRAINT `sessions_ibfk_1` FOREIGN KEY (`Username`) REFERENCES `members` (`Username`) ON DELETE CASCADE;
+  ADD CONSTRAINT `sessions_ibfk_1` FOREIGN KEY (`member_ID`) REFERENCES `members` (`member_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `videos`
+--
+ALTER TABLE `videos`
+  ADD CONSTRAINT `videos_ibfk_1` FOREIGN KEY (`member_ID`) REFERENCES `members` (`member_ID`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

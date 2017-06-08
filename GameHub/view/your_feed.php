@@ -16,8 +16,8 @@
     $user = get_member($username);
 
     global $conn;
-    $stmt = $conn->prepare("SELECT count(*) FROM `videos` WHERE `Username` = ?");
-    $stmt->execute(array($username));
+    $stmt = $conn->prepare("SELECT count(*) FROM `videos` WHERE `member_ID` = ?");
+    $stmt->execute(array($user['member_ID']));
     $vidCount = $stmt->fetch();
     $vidCount = $vidCount['count(*)'];
       print('<div class="profile-boxmb">
@@ -60,8 +60,8 @@
           $user = get_member($username);
 
           global $conn;
-          $stmt = $conn->prepare("SELECT count(*) FROM `videos` WHERE `Username` = ?");
-          $stmt->execute(array($username));
+          $stmt = $conn->prepare("SELECT count(*) FROM `videos` WHERE `member_ID` = ?");
+          $stmt->execute(array($user['member_ID']));
           $vidCount = $stmt->fetch();
           $vidCount = $vidCount['count(*)'];
             print('<div class="profile-box">
@@ -100,49 +100,50 @@
   <div class ="feed">
         <?php
         global $conn;
-		if(isLogged()) {
-			//Get a listing of all the users the logged in user is following
-			$sql = "SELECT * FROM `followers` WHERE `followerID` = ?";
-			$statement = $conn->prepare($sql);
-			$statement->execute(array($_SESSION['user']));
+        if(isLogged()) {
+            //Get a listing of all the users the logged in user is following
+            $sql = "SELECT * FROM `followers` WHERE `followerID` = ?";
+            $statement = $conn->prepare($sql);
+            $statement->execute(array($user['member_ID']));
 
-			//Set blank array where videos will be placed
-			$videos = array();
-			$followedUsers = $statement->fetchAll(PDO::FETCH_ASSOC);
-			//Iterate through each followed user and fetch their videos
-			foreach($followedUsers as $followedUser) {
-				$sql = "SELECT * FROM `videos` WHERE `Username` = ?";
-				$statement = $conn->prepare($sql);
-				$statement->execute(array($followedUser['followingID']));
-				$result = $statement->fetchAll(PDO::FETCH_ASSOC);
-				//Iterate through the current followed users videos and add them to the video array to be displayed later
-				foreach($result as $video) {
-					$videos[] = $video;
-				}
-			}
-		} else {
-			//if user is not logged in grab every video and display it on the feed
-			$sql = 'SELECT * FROM videos ORDER BY Date_added DESC';
-			$statement = $conn->prepare($sql);
-			$statement->execute();
-			$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            //Set blank array where videos will be placed
+            $videos = array();
+            $followedUsers = $statement->fetchAll(PDO::FETCH_ASSOC);
+            //Iterate through each followed user and fetch their videos
+            foreach($followedUsers as $followedUser) {
+                $sql = "SELECT * FROM `videos` WHERE `member_ID` = ?";
+                $statement = $conn->prepare($sql);
+                $statement->execute(array($followedUser['followingID']));
+                $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+                //Iterate through the current followed users videos and add them to the video array to be displayed later
+                foreach($result as $video) {
+                    $videos[] = $video;
+                }
+            }
+        } else {
+            //if user is not logged in grab every video and display it on the feed
+            $sql = 'SELECT * FROM videos ORDER BY Date_added DESC';
+            $statement = $conn->prepare($sql);
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-			foreach($result as $video) {
-				$videos[] = $video;
-			}
-		}
+            foreach($result as $video) {
+                $videos[] = $video;
+            }
+        }
 
-		// iterate through the video array that was populated previously
+        // iterate through the video array that was populated previously
         foreach ($videos as $item){
+          $uploader = get_member_by_id($item['member_ID']);
                 echo '<div class="feed-item">
                          <div class="feed-video">
                             <video src="../' . $item['Vid_url'] . '" width="100%" controls></video>
                          </div>
                         <div class="feed-description">
-                          <a class="author-avatar" href="profile.php?username=' . $item['Username'] . '"><img class="avatar" src="' . get_avatar($item['Username']) . '" alt="Author Image"></a>
-                          <p class="mt9"><a class="author-name" href="profile.php?username=' . $item['Username'] . '">' . $item['Username'] . '</a>' . $item['Vid_description'] . '</p>';
+                          <a class="author-avatar" href="profile.php?username=' . $uploader['Username'] . '"><img class="avatar" src="' . get_avatar($uploader['Username']) . '" alt="Author Image"></a>
+                          <p class="mt9"><a class="author-name" href="profile.php?username=' . $uploader['Username'] . '">' . $uploader['Username'] . '</a>' . $item['Vid_description'] . '</p>';
                             if(isLogged()){
-                              if($item['Username'] == $_SESSION['user']) {
+                              if($uploader['Username'] == $_SESSION['user']) {
                                 ?>
                                 <a  href="../controller/delete_video_process.php?vidID=<?php echo $item["Vid_ID"]; ?>" onclick="return confirm('Are you sure you want to delete this video?')">
                                   <button class="delete-video">Delete Video</button>
@@ -150,9 +151,9 @@
                                 <?php }
                             } echo '
                         </div>
-                     	</div>';
+                        </div>';
 
-								echo "<div id='comments_{$item['Vid_ID']}'>";
+                                echo "<div id='comments_{$item['Vid_ID']}'>";
 
         global $conn;
         $sql = 'SELECT * FROM comments WHERE comments.Vid_ID = :id ORDER BY comments.Date_added LIMIT 0,2';
@@ -164,13 +165,14 @@
         $commentCount = intVal(get_comment_count($item['Vid_ID'])['commentCount']);
 
           foreach ($result as $item) {
+          $uploader = get_member_by_id($item['member_ID']);
           echo '<div class="comment-list">
             <div class="comment-entry">
-              <a class="author-avatar" href="profile.php?username=' . $item['Username'] . '"><img class="avatar comment-avatar" src="' . get_avatar($item['Username']) . '" alt="Author Image"></a>
-              <p class="mt4"><a class="author-name" href="profile.php?username=' . $item['Username'] . '">' . $item['Username'] . '</a>' . $item['Comment_txt'] . '</p>
+              <a class="author-avatar" href="profile.php?username=' . $uploader['Username'] . '"><img class="avatar comment-avatar" src="' . get_avatar($uploader['Username']) . '" alt="Author Image"></a>
+              <p class="mt4"><a class="author-name" href="profile.php?username=' . $uploader['Username'] . '">' . $uploader['Username'] . '</a>' . $item['Comment_txt'] . '</p>
               ';
               if(isLogged()){
-                if($item['Username'] == $_SESSION['user']) {
+                if($uploader['Username'] == $_SESSION['user']) {
                   ?>
                   <a href="../controller/delete_comment_process.php?commentID=<?php echo $item["Comment_ID"]; ?>" onclick="return confirm('Are you sure you want to delete this comment?')">
                     <button class="delete-comment">X</button>

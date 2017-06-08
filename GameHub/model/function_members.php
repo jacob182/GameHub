@@ -84,7 +84,19 @@
         }
         return false;
 	}
-
+	function get_member_by_id($identifier)
+	    {
+	        global $conn;
+	        $sql = "SELECT * FROM members WHERE member_ID = :identifier";
+	        $statement = $conn->prepare($sql);
+	        $statement->bindValue(':identifier', $identifier);
+	        $statement->execute();
+	        $result = $statement->fetch();
+	        if(count($result) === 0) {
+	            return false;
+	        }
+	        return $result;
+	    }
 	function get_member($username)
 	{
 		global $conn;
