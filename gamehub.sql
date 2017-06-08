@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 07, 2017 at 05:09 PM
+-- Generation Time: Jun 08, 2017 at 09:25 AM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.6.23
 
@@ -84,7 +84,7 @@ CREATE TABLE `members` (
 --
 
 INSERT INTO `members` (`Username`, `Email`, `Password`, `ClientImage`, `Admin`, `followers`, `following`) VALUES
-('link182', 'jacobcoorey@gmail.com', 'f07a2acd1f939e7e68p19t87stazz139nt54tk683hqqffh37295d183345ea3a2d749e314d1aef3f7c83328cf2eb449cb39747df435cd6e7680a9daa62212b38fc01c7f7b7552f55c1ea442b0e5040278', '../images/profile_images/link182.jpg', 1, 1, 1),
+('link182', 'jacobcoorey@gmail.com', 'f07a2acd1f939e7e68p19t87stazz139nt54tk683hqqffh37295d183345ea3a2d749e314d1aef3f7c83328cf2eb449cb39747df435cd6e7680a9daa62212b38fc01c7f7b7552f55c1ea442b0e5040278', '../images/profile_images/link182.jpg', 2, 1, 1),
 ('username', 'user@gmail.com', '08a38c4d37d35252bpikwtd4uk57i8mr0u6mbm48011qxoqy9593ffb507fc289ea040f92a9e13a74cf2b59d06868b02284e864ce4fd9c1685ce03f7615d7e05bba66df0c235180fa7721297e1dd777dce', NULL, 1, 1, 1);
 
 -- --------------------------------------------------------
@@ -184,7 +184,7 @@ ALTER TABLE `sessions`
 -- AUTO_INCREMENT for table `videos`
 --
 ALTER TABLE `videos`
-  MODIFY `Vid_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `Vid_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- Constraints for dumped tables
 --
@@ -208,12 +208,6 @@ ALTER TABLE `followers`
 --
 ALTER TABLE `sessions`
   ADD CONSTRAINT `sessions_ibfk_1` FOREIGN KEY (`Username`) REFERENCES `members` (`Username`) ON DELETE CASCADE;
-
---
--- Constraints for table `videos`
---
-ALTER TABLE `videos`
-  ADD CONSTRAINT `account_delete_vid` FOREIGN KEY (`Username`) REFERENCES `members` (`Username`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
