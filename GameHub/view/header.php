@@ -38,22 +38,21 @@
           </a>
           <ul>
             <li><a href="feed.php">Discover</a></li> -
+            <li><a href="about.php">About</a></li> -
             <?php
             if(isLogged()) {
               print("<li><a href='your_feed.php'>Your Feed</a></li> -");
             } else {
-              print("<li><a href='login.php'>Your Feed</a></li> -");
             }
             ?>
 
             <?php
             if(isLogged()) {
-              print("<li><a href='profile.php'>Profile</a></li> -");
+              print("<li><a href='profile.php'>Profile</a></li>");
             } else {
-              print("<li><a href='login.php'>Profile</a></li> -");
             }
             ?>
-            <li><a href="about.php">About Us</a></li>
+
           </ul>
           <div id="clear"></div>
         </div>

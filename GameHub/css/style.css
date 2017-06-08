@@ -7,7 +7,7 @@ body {
 a {
   text-decoration:none;
 }
-h1 { color: #111; font-family: 'Helvetica Neue', sans-serif; font-size: 50px; font-weight: bold; letter-spacing: -1px; text-transform: capitalize; line-height: 1; text-align: center;}
+h1 { color: #111; font-family: 'Helvetica Neue', sans-serif; font-size: 50px; font-weight: bold; letter-spacing: -1px; line-height: 1; text-align: center;}
 
 
 h2 { color: #111; font-family: 'Open Sans', sans-serif; font-size: 30px; font-weight: 300; line-height: 32px; margin: 0 0 15px; text-align: center; }
@@ -326,14 +326,12 @@ input, textarea {
   margin: 5px 5px 0 0;
 }
 .author-name{
-  text-transform: capitalize;
   display: inline-block;
   font-weight: 700;
   margin-right: 5px;
   color: #75affc;
 }
 .username, .usernamemb{
-  text-transform: capitalize;
   font-size: 1.5em;
   width: 60%;
   line-height: 60px;
@@ -446,7 +444,6 @@ div.profile-stats ul li {
   text-shadow: 1px 1px 2px rgba(0,0,0,0.7)
 }
 .profile-header>h1 {
-  text-transform: capitalize;
   margin-left: -100px;
   margin-top: 5px;
   top: 0;
